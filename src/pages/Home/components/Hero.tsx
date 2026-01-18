@@ -401,7 +401,7 @@ function Hero() {
                         )}
 
                         {/* Titre */}
-                        <div className={`absolute z-20 p-6 transition-all duration-700 ${activeIndex === 0 ? "top-4 left-4" : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"}`}>
+                        <div className={`absolute z-20 p-6 transition-all duration-700 ${activeIndex === 0 ? "top-4 left-2" : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"}`}>
                             <h1 className={`font-bold uppercase tracking-tighter whitespace-nowrap ${activeIndex === 0 ? "text-3xl text-black" : "text-2xl text-white"}`}>
                                 Developpeur
                             </h1>
@@ -414,7 +414,7 @@ function Hero() {
                                     initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                                     className="absolute inset-0 p-6 flex flex-col justify-end"
                                 >
-                                    <div className="mb-20 md:w-[50%]">
+                                    <div className="mb-20 w-[90%] md:w-[50%]">
                                         <p className="text-sm font-medium leading-relaxed text-black/80 max-w-[80%]">
                                             Je suis développeur web et mobile, spécialisé dans la création d’applications modernes et performantes.
                                         </p>
@@ -455,7 +455,7 @@ function Hero() {
                         </div>
                         {activeIndex !== 1 && <div className="absolute inset-0 bg-black/40 z-10" />}
 
-                        <div className={`absolute z-20 p-6 transition-all duration-700 ${activeIndex === 1 ? "top-4 left-4" : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"}`}>
+                        <div className={`absolute z-20 p-6 transition-all duration-700 ${activeIndex === 1 ? "top-4 left-2" : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"}`}>
                             <h1 className={`font-bold uppercase tracking-tighter ${activeIndex === 1 ? "text-3xl text-black" : "text-2xl text-white"}`}>
                                 Insights
                             </h1>
@@ -492,7 +492,7 @@ function Hero() {
                         </div>
                         {activeIndex !== 2 && <div className="absolute inset-0 bg-black/40 z-10" />}
 
-                        <div className={`absolute z-20 p-6 transition-all duration-700 ${activeIndex === 2 ? "top-4 left-4" : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"}`}>
+                        <div className={`absolute z-20 transition-all duration-700 ${activeIndex === 2 ? "top-4 left-2 p-6" : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"}`}>
                             <h1 className={`font-bold uppercase tracking-tighter ${activeIndex === 2 ? "text-3xl text-black" : "text-2xl text-white"}`}>
                                 Workflow
                             </h1>

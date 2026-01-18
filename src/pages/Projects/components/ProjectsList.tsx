@@ -82,14 +82,14 @@ export default function ProjectsList() {
           <div className="flex-1 space-y-5">
             {/* Title */}
             <div className="flex items-center gap-5">
-              <div className="flex items-center justify-center min-w-14 h-14 rounded-full border border-gray-800 text-2xl font-light">
+              <div className="flex items-center justify-center min-w-10 h-10 md:min-w-14 md:h-14 rounded-full border border-gray-800 text-2xl font-light">
                 {index + 1}
               </div>
-              <h2 className="text-4xl font-bold tracking-tight text-gray-900">{project.title}</h2>
+              <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-gray-900">{project.title}</h2>
             </div>
 
             {/* Description */}
-            <p className="text-gray-500 leading-relaxed text-[17px] max-w-2xl">{project.description}</p>
+            <p className="text-gray-500 leading-relaxed text-[15px] md:text-[17px] max-w-2xl">{project.description}</p>
 
             {/* Status */}
             <div className="flex gap-8 items-center text-[15px] font-medium text-gray-800">
@@ -117,10 +117,10 @@ export default function ProjectsList() {
 
             {/* Buttons */}
             <div className="flex gap-4 pt-2">
-              <button className="flex items-center gap-2 bg-black text-white px-7 py-3 rounded-full hover:opacity-80 transition font-bold text-sm">
+              <button className="flex items-center gap-1 md:gap-2 bg-black text-white px-4 py-2 md:px-7 md:py-3 rounded-full hover:opacity-80 transition font-medium md:font-bold text-[10px] md:text-sm">
                 <FiExternalLink size={18} /> Live demo
               </button>
-              <button className="flex items-center gap-2 bg-black text-white px-7 py-3 rounded-full hover:opacity-80 transition font-bold text-sm">
+              <button className="flex items-center gap-2 bg-black text-white px-7 py-3 rounded-full hover:opacity-80 transition font-bold text-[10px] md:text-sm">
                 <FaGithub size={18} /> Code
               </button>
             </div>
@@ -136,17 +136,15 @@ export default function ProjectsList() {
           </div>
 
           {/* -------- RIGHT MOCKUPS -------- */}
-          <div className="flex-1 relative w-full min-h-100 md:block">
-            {/* Desktop */}
-            <div className="absolute left-10 top-0 w-[85%] rounded-xl border-[6px] border-white bg-white overflow-hidden">
-              <img src={project.images.desktop} alt="Desktop" />
-            </div>
-            {/* Mobile */}
-            <div className="absolute bottom-0 w-[25%] rounded-xl border-[6px] border-white bg-white z-30">
+          <div className="flex justify-conter w-full lg:w-[40%] lg:h-full">
+            <div className="mt-20 w-[25%] rounded-xl border-[6px] border-white bg-white relative">
               <img src={project.images.mobile} alt="Mobile" />
             </div>
+            <div className="left-10 top-0 w-[85%] -ml-10 rounded-xl border-[6px] border-white bg-white overflow-hidden">
+              <img src={project.images.desktop} alt="Desktop" />
+            </div>
             {/* Tablet */}
-            <div className="absolute bottom-0 -right-2 w-[30%] rounded-xl border-[6px] border-white bg-white z-20">
+            <div className="mt-20 w-[30%] rounded-xl border-[6px] -ml-10 border-white bg-white">
               <img src={project.images.tablet} alt="Tablet" />
             </div>
           </div>

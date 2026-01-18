@@ -60,7 +60,7 @@ function ServicesList() {
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="relative z-20 w-full rounded-t-[15px] lg:rounded-t-0 lg:w-[45%] h-64 md:h-80 overflow-hidden shadow-xl"
+              className="relative z-20 w-full lg:rounded-t-none rounded-t-[15px] lg:w-[45%] h-64 md:h-80 overflow-hidden lg:shadow-xl"
             >
               <img
                 src={service.image}
@@ -103,10 +103,10 @@ function ServicesList() {
                   </div>
 
                   <div className="flex gap-3">
-                    <Button className="bg-black text-white px-8 py-3 rounded-full font-bold text-sm hover:bg-gray-800 transition-all">
+                    <Button className="bg-black text-white px-5 py-2 md:px-8 md:py-3 rounded-full font-bold text-[12px] md:text-sm hover:bg-gray-800 transition-all">
                       Intéressé
                     </Button>
-                    <Button className="bg-white text-gray-900 border border-gray-300 px-8 py-3 rounded-full font-bold text-sm hover:bg-gray-50 transition-all">
+                    <Button className="bg-white text-gray-900 border border-gray-300 px-8 py-3 rounded-full font-bold text-[12px] md:text-sm hover:bg-gray-50 transition-all">
                       En savoir plus
                     </Button>
                   </div>

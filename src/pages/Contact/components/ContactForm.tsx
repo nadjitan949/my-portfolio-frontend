@@ -17,7 +17,7 @@ function ContactForm() {
           />
           
           {/* Overlay avec les infos de contact */}
-          <div className="relative z-10 h-full flex flex-col justify-between p-12 text-white">
+          <div className="relative z-10 h-full flex flex-col justify-between p-8 md:p-12 text-white">
             <div>
               <h2 className="text-4xl font-black leading-tight tracking-tighter">
                 TRAVAILLONS <br /> <span className="text-blue-500">ENSEMBLE.</span>
@@ -96,9 +96,9 @@ function ContactForm() {
             <motion.button 
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="relative overflow-hidden group w-full md:w-auto bg-black text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all shadow-xl shadow-black/10 hover:shadow-blue-500/20"
+              className="relative overflow-hidden group w-full md:w-auto bg-black text-white px-10 md:px-12 py-5 rounded-2xl font-black uppercase tracking-widest text-[12px] md:text-sm flex items-center justify-center gap-2 md:gap-3 transition-all shadow-xl shadow-black/10 hover:shadow-blue-500/20"
             >
-              <Button className="relative z-10 flex items-center gap-3">
+              <Button className="relative z-10 flex items-center gap-2 md:gap-3">
                 Envoyer le message <FiSend size={18} className="group-hover:translate-x-1 transition-transform" />
               </Button>
               <div className="absolute inset-0 bg-blue-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />

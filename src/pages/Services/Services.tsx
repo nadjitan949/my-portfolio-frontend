@@ -6,7 +6,7 @@ function Services() {
   return (
     <>
     <main className=" flex flex-col gap-15">
-        <ServicesHead/><br />
+        <ServicesHead/>
         <SectionTitle text="Mes services"/>
         <ServicesList/>
     </main>

@@ -35,7 +35,7 @@ function ServicesHead() {
           {/* Image Principale (Arrière-plan flottant) */}
           <motion.div
             style={{ y: yImage1 }}
-            className="absolute top-0 right-10 w-[70%] h-[75%] rounded-[60px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)]"
+            className="absolute top-0 left-10 lg:left-15 lg:right-10 lg:w-[70%] h-[75%] rounded-[60px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)]"
           >
             <img src={Image1} alt="" className="w-full h-full object-cover scale-110" />
             <div className="absolute inset-0 bg-blue-900/10 mix-blend-overlay" />
@@ -44,7 +44,7 @@ function ServicesHead() {
           {/* Image Secondaire (Avant-plan / Détail) */}
           <motion.div
             style={{ y: yImage2 }}
-            className="absolute bottom-10 left-0 w-[60%] h-[55%] z-20 rounded-[50px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25)] border-15 border-white"
+            className="absolute bottom-10 -left-5 lg:left-0 w-[75%] lg:w-[60%] h-[55%] z-20 rounded-[50px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25)] border-8 lg:border-15 border-white"
           >
             <img src={Image2} alt="" className="w-full h-full object-cover grayscale brightness-110" />
           </motion.div>

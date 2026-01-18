@@ -59,10 +59,10 @@ function Review() {
           className="relative bg-white lg:w-[50%] lg:h-80 mx-5 lg:mx-0 rounded-[10px] p-10 flex flex-col items-center justify-center overflow-hidden"
         >
           {/* Griffes internes en background */}
-          <span className="absolute top-2 left-4 text-blue-500 text-[80px] font-bold select-none pointer-events-none">
+          <span className="absolute hidden md:block top-2 left-4 text-blue-500 text-[80px] font-bold select-none pointer-events-none">
             “
           </span>
-          <span className="absolute bottom-2 right-4 text-blue-500 text-[80px] font-bold select-none pointer-events-none">
+          <span className="absolute hidden md:block bottom-2 right-4 text-blue-500 text-[80px] font-bold select-none pointer-events-none">
             ”
           </span>
 

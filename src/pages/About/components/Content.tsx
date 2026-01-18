@@ -111,7 +111,7 @@ function Content() {
                         { label: "Technologies", value: "15+" },
                     ].map((stat, i) => (
                         <div key={i} className="text-center">
-                            <h4 className="text-4xl md:text-5xl font-black text-gray-900">{stat.value}</h4>
+                            <h4 translate="no" className="text-4xl md:text-5xl font-black text-gray-900">{stat.value}</h4>
                             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mt-2">{stat.label}</p>
                         </div>
                     ))}

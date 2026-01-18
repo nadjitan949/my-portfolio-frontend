@@ -63,7 +63,7 @@ function WorkFlow() {
                     className="h-150 lg:w-[45%] rounded-[40px] relative overflow-hidden flex items-center justify-center"
                 >
                     <img src={DeskImage} alt="" className="object-cover w-full h-full" />
-                    <div className="absolute w-full h-full bg-black/50 p-15 flex flex-col gap-10">
+                    <div className="absolute w-full h-full bg-black/50 p-10 md:p-15 flex flex-col gap-10">
                         <motion.div variants={itemFromLeft} initial="hidden" animate={isLeftInView ? "visible" : "hidden"}>
                             <span className="text-white text-4xl font-medium">Organisation</span>
                         </motion.div>
@@ -76,16 +76,16 @@ function WorkFlow() {
 
                         <motion.div variants={itemFromLeft} initial="hidden" animate={isLeftInView ? "visible" : "hidden"} className="flex items-center gap-4">
                             <div className="flex -space-x-5">
-                                <img src="https://i.pravatar.cc/100?img=12" alt="" className="w-12 h-12 rounded-full border-2 border-white object-cover" />
-                                <img src="https://i.pravatar.cc/100?img=32" alt="" className="w-12 h-12 rounded-full border-2 border-white object-cover" />
-                                <img src="https://i.pravatar.cc/100?img=45" alt="" className="w-12 h-12 rounded-full border-2 border-white object-cover" />
-                                <div className="w-12 h-12 rounded-full backdrop-blur-md border-2 border-white flex items-center justify-center text-sm font-semibold text-white">
+                                <img src="https://i.pravatar.cc/100?img=12" alt="" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
+                                <img src="https://i.pravatar.cc/100?img=32" alt="" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
+                                <img src="https://i.pravatar.cc/100?img=45" alt="" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
+                                <div className="w-8 h-8 md:w-12 md:h-12 rounded-full backdrop-blur-md border-2 border-white flex items-center justify-center text-sm font-semibold text-white">
                                     +30
                                 </div>
                             </div>
                             <div className="flex flex-col text-white">
-                                <span className="text-lg font-semibold">Collaborations</span>
-                                <span className="text-sm text-white/70">projets menés avec succès</span>
+                                <span className="text-md md:text-lg font-semibold">Collaborations</span>
+                                <span className="text-[10px] md:text-sm text-white/70">projets menés avec succès</span>
                             </div>
                         </motion.div>
 
@@ -102,10 +102,10 @@ function WorkFlow() {
                     initial="hidden"
                     animate={isRightInView ? "visible" : "hidden"}
                     transition={{ duration: 0.8 }}
-                    className="h-180 lg:h-150 lg:w-[40%] rounded-[40px] relative overflow-hidden flex items-center justify-center"
+                    className="h-190 lg:h-150 lg:w-[40%] rounded-[40px] relative overflow-hidden flex items-center justify-center"
                 >
                     <img src={Background} alt="" className="object-cover w-full h-full" />
-                    <div className="absolute w-full h-full p-15 flex flex-col gap-12">
+                    <div className="absolute w-full h-full p-8 md:p-15 flex flex-col gap-12">
                         {/* Titre + texte */}
                         <motion.div variants={itemFromRight} initial="hidden" animate={isRightInView ? "visible" : "hidden"} className="flex flex-col gap-10 max-w-120">
                             <span className="text-4xl font-medium">Comment je travaille</span>
@@ -124,7 +124,7 @@ function WorkFlow() {
                             initial="hidden"
                             // L'animation se déclenche uniquement quand la grille arrive à l'écran
                             animate={isGridInView ? "visible" : "hidden"}
-                            className="grid grid-cols-3 gap-6 max-w-90 mt-auto"
+                            className="grid grid-cols-3 gap-6 w-full md:max-w-90 mt-auto"
                         >
                             {workflowSteps.map((step, i) => (
                                 <motion.div
@@ -133,7 +133,7 @@ function WorkFlow() {
                                     className="flex flex-col items-center justify-center bg-white rounded-2xl h-23"
                                 >
                                     {step.icon}
-                                    <span className="font-medium text-gray-500 text-sm">{step.label}</span>
+                                    <span className="font-medium text-gray-500 text-[10px] md:text-sm">{step.label}</span>
                                 </motion.div>
                             ))}
                         </motion.div>
