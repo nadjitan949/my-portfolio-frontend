@@ -1,18 +1,19 @@
-import { FiLogIn, FiX, FiMenu } from "react-icons/fi";
-import Button from "../ui/Button";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { FiLogIn, FiX, FiMenu } from "react-icons/fi"
+import Button from "../ui/Button"
+import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import ChatWidget from "./ChatWidget"
 
 function Header() {
-    const [menuModal, setMenuModal] = useState(false);
+    const [menuModal, setMenuModal] = useState(false)
     const navigate = useNavigate();
 
     const ToggleMenu = () => setMenuModal((prev) => !prev);
 
     // Fonction de navigation qui ferme aussi le menu mobile
     const handleNavigate = (path: string) => {
-        navigate(path);
-        setMenuModal(false);
+        navigate(path)
+        setMenuModal(false)
     };
 
     const navLinks = [
@@ -28,7 +29,7 @@ function Header() {
         <>
             <header className="w-full h-20 md:h-24 px-6 md:px-15 relative z-50">
                 <div className="w-full h-full flex items-center justify-between">
-                    
+
                     {/* LOGO */}
                     <div className="cursor-pointer" onClick={() => navigate("/")}>
                         <span className="font-bold text-2xl italic tracking-tighter text-black">
@@ -41,8 +42,8 @@ function Header() {
                         <ul className="flex items-center gap-2">
                             {navLinks.map((link) => (
                                 <li key={link.name}>
-                                    <Button 
-                                        onClick={() => navigate(link.path)} 
+                                    <Button
+                                        onClick={() => navigate(link.path)}
                                         className="px-4 py-2 rounded-full text-sm font-medium border hover:bg-black hover:text-white transition-all duration-300"
                                     >
                                         {link.name}
@@ -62,7 +63,7 @@ function Header() {
                     </div>
 
                     {/* BURGER ICON (MOBILE) */}
-                    <button 
+                    <button
                         onClick={ToggleMenu}
                         className="lg:hidden p-2 text-black transition-transform active:scale-90"
                     >
@@ -71,16 +72,14 @@ function Header() {
                 </div>
 
                 {/* MOBILE MENU (SIDEBAR) */}
-                <div 
-                    className={`fixed top-0 left-0 w-full h-full bg-black/20 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
-                        menuModal ? "opacity-100 visible" : "opacity-0 invisible"
-                    }`}
+                <div
+                    className={`fixed top-0 left-0 w-full h-full bg-black/20 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${menuModal ? "opacity-100 visible" : "opacity-0 invisible"
+                        }`}
                     onClick={ToggleMenu}
                 />
-                
-                <div className={`fixed top-0 right-0 w-[75%] max-w-xs h-screen bg-white shadow-2xl z-50 transition-transform duration-500 ease-in-out lg:hidden p-8 ${
-                    menuModal ? "translate-x-0" : "translate-x-full"
-                }`}>
+
+                <div className={`fixed top-0 right-0 w-[75%] max-w-xs h-screen bg-white shadow-2xl z-50 transition-transform duration-500 ease-in-out lg:hidden p-8 ${menuModal ? "translate-x-0" : "translate-x-full"
+                    }`}>
                     <div className="flex justify-between items-center mb-10">
                         <span className="font-bold italic text-xl">Menu</span>
                         <button onClick={ToggleMenu} className="p-2 bg-gray-100 rounded-full">
@@ -91,7 +90,7 @@ function Header() {
                     <ul className="flex flex-col gap-2">
                         {navLinks.map((link) => (
                             <li key={link.name}>
-                                <button 
+                                <button
                                     onClick={() => handleNavigate(link.path)}
                                     className="w-full text-left px-4 py-3 rounded-xl text-lg font-medium hover:bg-gray-100 transition-colors"
                                 >
@@ -111,6 +110,8 @@ function Header() {
                     </div>
                 </div>
             </header>
+
+            <ChatWidget/>
         </>
     );
 }
