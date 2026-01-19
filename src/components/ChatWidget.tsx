@@ -57,7 +57,7 @@ function ChatWidget() {
 
         } catch (error) {
             console.error("Erreur chatbot:", error)
-
+            setChatLoad(false)
             setMessages(prev => [
                 ...prev,
                 {
@@ -129,10 +129,10 @@ function ChatWidget() {
                                     animate={{ opacity: 1, y: 0 }}
                                     className={`flex items-start gap-3 ${msg.isBot ? "self-start" : "self-end flex-row-reverse"}`}
                                 >
-                                    {/* Avatar */}
                                     <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${msg.isBot ? "bg-gray-200 overflow-hidden text-black" : "bg-gray-200 text-black"
                                         }`}>
                                         {msg.isBot ? (<motion.img src={BotProfil} className="w-full h-full" />) : <FiUser size={18} />}
+                                        
                                     </div>
                                     {/* Contenu du message */}
                                     <div
