@@ -52,8 +52,6 @@ function WorkFlow() {
     return (
         <section className="w-full p-5 lg:px-15">
             <div className=" flex flex-col lg:flex-row items-center justify-center gap-5">
-
-                {/* Bloc Organisation */}
                 <motion.div
                     ref={leftRef}
                     variants={itemFromLeft}
