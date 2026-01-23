@@ -1,54 +1,61 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import Button from '../../../ui/Button'
+import api from '../../../api/axios'
 
-const testimonials = [
-    {
-        name: "Jeanne Doe",
-        role: "Front end developpeur",
-        text: "J'ai collaboré avec Benjamin sur plusieurs projets informatiques. Il se distingue par son sérieux.",
-        img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400"
-    },
-    {
-        name: "John Smith",
-        role: "UI/UX Designer",
-        text: "Un travail remarquable sur l'interface utilisateur. Benjamin comprend parfaitement les besoins. Un travail remarquable sur l'interface utilisateur. Benjamin comprend parfaitement les besoins. Un travail remarquable sur l'interface utilisateur. Benjamin comprend parfaitement les besoins.",
-        img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400"
-    },
-    {
-        name: "Marc Antoine",
-        role: "Product Manager",
-        text: "Efficace et rigoureux, Benjamin est un atout précieux pour toute équipe technique.",
-        img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400"
-    },
-    {
-        name: "Sophie Claire",
-        role: "Back-end Dev",
-        text: "Une maîtrise parfaite des APIs et une communication fluide.",
-        img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400"
-    },
-    {
-        name: "Paul Victor",
-        role: "CTO",
-        text: "Benjamin livre toujours dans les temps avec une qualité de code irréprochable.",
-        img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400"
-    }
-];
+interface Image {
+    url: string
+    public_id: string
+}
+
+interface Testimonial {
+    id: number
+    author: string
+    jobTitle: string
+    content: string
+    image: Image
+}
 
 function Collabs() {
     const [currentIndex, setCurrentIndex] = useState(0)
+    const [testimonials, setTestimonials] = useState<Testimonial[] | null>(null)
 
     const containerRef = useRef<HTMLDivElement | null>(null)
     const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
     const getTestimonial = (offset: number) => {
-        const index = (currentIndex + offset + testimonials.length) % testimonials.length
-        return testimonials[index]
+        if (!testimonials || testimonials.length === 0) return null;
+        const index = (currentIndex + offset + testimonials.length) % testimonials.length;
+        return testimonials[index]; // <-- ici on retourne bien l'objet à l'index
     }
 
-    const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-    const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+
+    useEffect(() => {
+        const fetchTestimonials = async () => {
+            try {
+
+                const res = await api.get("/feedbacks/all")
+                if (!res.data.success) return alert(res.data.message)
+
+                const data: Testimonial[] = res.data.feedbacks
+                setTestimonials(data)
+
+            } catch (error) {
+                console.log("Erreur: ", error)
+            }
+        }
+        fetchTestimonials()
+    }, [])
+
+    const nextSlide = () => {
+        if (!testimonials || testimonials.length === 0) return
+        setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+    };
+    const prevSlide = () => {
+        if (!testimonials || testimonials.length === 0) return
+        setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+    }
 
     return (
         <section className="text-center overflow-hidden">
@@ -63,18 +70,18 @@ function Collabs() {
 
                     {/* Décoration Gauche - Index -2 */}
                     <motion.div key={`p2-${currentIndex}`}
-                        initial={{opacity:0}}
-                        animate={isInView ? {opacity:0.2} : {}}
+                        initial={{ opacity: 0 }}
+                        animate={isInView ? { opacity: 0.2 } : {}}
                         className="hidden rounded-[20px] overflow-hidden lg:block w-24 h-24 diamond-shape mt-24">
-                        <img src={getTestimonial(-2).img} alt="" className="object-cover w-full h-full grayscale" />
+                        <img src={getTestimonial(-2)?.image.url} alt="" className="object-cover w-full h-full grayscale" />
                     </motion.div>
 
                     {/* Décoration Gauche - Index -1 */}
                     <motion.div key={`p1-${currentIndex}`}
-                        initial={{x: 50, opacity:0}}
-                        animate={isInView ? {x: 0, opacity:0.5} : {}}
+                        initial={{ x: 50, opacity: 0 }}
+                        animate={isInView ? { x: 0, opacity: 0.5 } : {}}
                         className="hidden rounded-[20px] overflow-hidden sm:block w-40 h-40 diamond-shape mb-12 shadow-lg">
-                        <img src={getTestimonial(-1).img} alt="" className="object-cover w-full h-full grayscale" />
+                        <img src={getTestimonial(-1)?.image.url} alt="" className="object-cover w-full h-full grayscale" />
                     </motion.div>
 
                     {/* Témoignage Central */}
@@ -89,14 +96,14 @@ function Collabs() {
                                 className="flex flex-col items-center"
                             >
                                 <div className="w-48 h-48 md:w-60 md:h-60 diamond-shape shadow-2xl rounded-[30px] overflow-hidden border-4 border-white pentagon-shape">
-                                    <img src={getTestimonial(0).img} alt="" className="object-cover w-full h-full" />
+                                    <img src={getTestimonial(0)?.image.url} alt="" className="object-cover w-full h-full" />
                                 </div>
 
                                 <div className="mt-10 max-w-md">
-                                    <h3 className="text-2xl font-bold text-gray-900">{getTestimonial(0).name}</h3>
-                                    <p className="text-blue-500 font-medium mb-4">{getTestimonial(0).role}</p>
+                                    <h3 className="text-2xl font-bold text-gray-900">{getTestimonial(0)?.author}</h3>
+                                    <p className="text-blue-500 font-medium mb-4">{getTestimonial(0)?.jobTitle}</p>
                                     <p className="text-gray-500 italic w-50 lg:w-full text-sm md:text-base leading-relaxed line-clamp-3">
-                                        "{getTestimonial(0).text}"
+                                        "{getTestimonial(0)?.content}"
                                     </p>
                                 </div>
                             </motion.div>
@@ -105,18 +112,18 @@ function Collabs() {
 
                     {/* Décoration Droite - Index +1 */}
                     <motion.div key={`n1-${currentIndex}`}
-                        initial={{x: -50, opacity:0}}
-                        animate={isInView ? {x: 0, opacity:0.5} : {}}
+                        initial={{ x: -50, opacity: 0 }}
+                        animate={isInView ? { x: 0, opacity: 0.5 } : {}}
                         className="hidden sm:block w-40 rounded-[20px] overflow-hidden h-40 diamond-shape mb-12 shadow-lg pentagon-shape">
-                        <img src={getTestimonial(1).img} alt="" className="object-cover w-full h-full grayscale" />
+                        <img src={getTestimonial(1)?.image.url} alt="" className="object-cover w-full h-full grayscale" />
                     </motion.div>
 
                     {/* Décoration Droite - Index +2 */}
                     <motion.div key={`n2-${currentIndex}`}
-                        initial={{opacity:0}}
-                        animate={isInView ? {opacity:0.2} : {}}
+                        initial={{ opacity: 0 }}
+                        animate={isInView ? { opacity: 0.2 } : {}}
                         className="hidden rounded-[20px] overflow-hidden lg:block w-24 h-24 diamond-shape mt-24 pentagon-shape">
-                        <img src={getTestimonial(2).img} alt="" className="object-cover w-full h-full grayscale" />
+                        <img src={getTestimonial(2)?.image.url} alt="" className="object-cover w-full h-full grayscale" />
                     </motion.div>
 
                 </div>
