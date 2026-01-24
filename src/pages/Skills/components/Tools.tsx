@@ -36,7 +36,7 @@ function SkillBox({ skill }: { skill: Skill }) {
         >
             <div className="flex flex-col gap-5">
                 <div className="flex items-center justify-between">
-                    <div className="w-14 h-14 rounded-2xl overflow-hidden bg-gray-50 flex items-center justify-center p-2">
+                    <div className="w-14 h-14 rounded-2xl overflow-hidden bg-gray-50 flex items-center justify-center">
                         <img
                             src={skill.image.url}
                             alt={skill.name}

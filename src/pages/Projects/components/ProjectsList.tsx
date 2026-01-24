@@ -1,75 +1,60 @@
-import { motion } from "framer-motion";
-import { FiExternalLink, FiUser, FiCheckCircle } from "react-icons/fi";
-import { FaGithub, FaBriefcase } from "react-icons/fa";
+import { motion } from "framer-motion"
+import { FiExternalLink, FiUser, FiCheckCircle } from "react-icons/fi"
+import { FaGithub, FaBriefcase } from "react-icons/fa"
+import { useEffect, useState } from "react"
+import api from "../../../api/axios"
 
-import Web1 from "../../../assets/web (1).png";
-import Tablette1 from "../../../assets/tabelettes.png";
-import Mobile1 from "../../../assets/mobile.png";
 
+interface Image {
+  url: string
+  public_id: string
+}
 
 type Project = {
-  id: number;
-  title: string;
-  description: string;
-  type: string;
-  status: string;
-  collaborators: string[];
-  images: {
-    desktop: string;
-    tablet: string;
-    mobile: string;
-  };
-};
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "Designplus",
-    description:
-      "Design Plus est un site vitrine dédié à la présentation de projets de mobilier sur mesure. Il a été conçu pour offrir une navigation claire, une mise en page structurée et une expérience utilisateur fluide.",
-    type: "Projet professionnel",
-    status: "Achévé",
-    collaborators: ["Crepin ngueta", "Wilson bahun denis"],
-    images: {
-      desktop: Web1,
-      tablet: Tablette1,
-      mobile: Mobile1,
-    },
-  },
-  {
-    id: 2,
-    title: "PortfolioX",
-    description:
-      "PortfolioX est une plateforme qui met en avant les projets graphiques d’artistes et designers, offrant une navigation fluide et moderne.",
-    type: "Projet personnel",
-    status: "En cours",
-    collaborators: ["Alice Dupont", "John Doe"],
-    images: {
-      desktop: Web1,
-      tablet: Tablette1,
-      mobile: Mobile1,
-    },
-  },
-];
-
-const tags = [
-  "vue js",
-  "tailwind css",
-  "node js",
-  "react js",
-  "bootstrap css scss",
-  "postgres sql",
-];
+  id: number
+  title: string
+  description: string
+  type: string
+  status: string
+  collabTags: string[] | null
+  tools: string[]
+  live: string | ""
+  github: string | ""
+  computerView: Image | null
+  tabletteView: Image | null
+  mobileView: Image | null
+}
 
 const cardVariants = {
   hidden: { opacity: 0, scale: 0.9, y: 80 },
   visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.1 } },
-};
+}
 
-export default function ProjectsList() {
+function ProjectsList() {
+
+  const [projects, setProject] = useState<Project[] | null>(null)
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+
+        const res = await api.get("/projects/all")
+        if (!res.data.success) return alert(res.data.message)
+
+        const data: Project[] = res.data.projects
+        setProject(data)
+
+      } catch (error) {
+        console.log("Erreur: ", error)
+      }
+    }
+
+    fetchProjects()
+  }, [])
+
   return (
     <section className="w-full py-16 px-6 md:px-12 lg:px-24 flex flex-col items-center gap-10 font-sans bg-gray-200 pb-70">
-      {projects.map((project, index) => (
+      {projects?.map((project, index) => (
         <motion.div
           key={project.id}
           variants={cardVariants}
@@ -105,7 +90,7 @@ export default function ProjectsList() {
 
             {/* Collaborators */}
             <div className="flex flex-wrap gap-4">
-              {project.collaborators.map((name) => (
+              {project.collabTags?.map((name) => (
                 <div key={name} className="flex items-center gap-2 bg-[#eef4ff] px-4 py-2 rounded-full">
                   <div className="bg-[#d0e0ff] p-1.5 rounded-full">
                     <FiUser className="text-[#3b82f6] text-sm" />
@@ -117,17 +102,37 @@ export default function ProjectsList() {
 
             {/* Buttons */}
             <div className="flex gap-4 pt-2">
-              <button className="flex items-center gap-1 md:gap-2 bg-black text-white px-4 py-2 md:px-7 md:py-3 rounded-full hover:opacity-80 transition font-medium md:font-bold text-[10px] md:text-sm">
+              <a
+                href={project.live ?? "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  if (!project.live) {
+                    e.preventDefault()
+                    alert("Projet en cours 🚧")
+                  }
+                }}
+                className="flex items-center gap-1 md:gap-2 bg-black text-white px-4 py-2 md:px-7 md:py-3 rounded-full hover:opacity-80 transition font-medium md:font-bold text-[10px] md:text-sm">
                 <FiExternalLink size={18} /> Live demo
-              </button>
-              <button className="flex items-center gap-2 bg-black text-white px-7 py-3 rounded-full hover:opacity-80 transition font-bold text-[10px] md:text-sm">
+              </a>
+              <a
+                href={project.github ?? "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  if (!project.github) {
+                    e.preventDefault()
+                    alert("Projet en cours 🚧")
+                  }
+                }}
+                className="flex items-center gap-2 bg-black text-white px-7 py-3 rounded-full hover:opacity-80 transition font-bold text-[10px] md:text-sm">
                 <FaGithub size={18} /> Code
-              </button>
+              </a>
             </div>
 
             {/* Tech stack */}
             <div className="flex flex-wrap gap-3 pt-4">
-              {tags.map((tag) => (
+              {project.tools.map((tag) => (
                 <span key={tag} className="px-6 py-2 border border-gray-600 rounded-full text-[14px] text-gray-800 font-medium">
                   {tag}
                 </span>
@@ -138,18 +143,20 @@ export default function ProjectsList() {
           {/* -------- RIGHT MOCKUPS -------- */}
           <div className="flex justify-conter w-full lg:w-[40%] lg:h-full">
             <div className="mt-20 w-[25%] rounded-xl border-[6px] border-white bg-white relative">
-              <img src={project.images.mobile} alt="Mobile" />
+              <img src={project.mobileView?.url} alt="Mobile" />
             </div>
             <div className="left-10 top-0 w-[85%] -ml-10 rounded-xl border-[6px] border-white bg-white overflow-hidden">
-              <img src={project.images.desktop} alt="Desktop" />
+              <img src={project.computerView?.url} alt="Desktop" />
             </div>
             {/* Tablet */}
             <div className="mt-20 w-[30%] rounded-xl border-[6px] -ml-10 border-white bg-white">
-              <img src={project.images.tablet} alt="Tablet" />
+              <img src={project.tabletteView?.url} alt="Tablet" />
             </div>
           </div>
         </motion.div>
       ))}
     </section>
-  );
+  )
 }
+
+export default ProjectsList
