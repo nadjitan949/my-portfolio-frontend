@@ -5,6 +5,7 @@ import Skills from "../pages/Skills/Skills";
 import Project from "../pages/Projects/Project";
 import Services from "../pages/Services/Services";
 import Contact from "../pages/Contact/Contact";
+import ServicesDetails from "../pages/Services/components/ServicesDetails";
 
 function AppRouter() {
   return (
@@ -14,6 +15,7 @@ function AppRouter() {
       <Route path="/experiences" element={<Skills/>} />
       <Route path="/projects" element={<Project/>} />
       <Route path="/services" element={<Services/>}/>
+      <Route path="/service/details/:id" element={<ServicesDetails />} />
       <Route path="/contact" element={<Contact/>}/>
     </Routes>
   );
