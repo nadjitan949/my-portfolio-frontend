@@ -1,38 +1,80 @@
-import { FaHtml5, FaCss3Alt, FaJs, FaPython, FaPhp, FaJava } from "react-icons/fa";
-import { FaDartLang } from "react-icons/fa6";
-import { SiC, SiCplusplus, SiDatabricks, SiTypescript } from "react-icons/si";
-import illustration1 from "../../../assets/Rectangle 80.png";
-import illustration2 from "../../../assets/Rectangle 81.png";
-import illustration3 from "../../../assets/Rectangle 83.png";
-import { FiArrowRight } from "react-icons/fi";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { HiChartBar, HiCode } from "react-icons/hi";
-import { HiOutlineWrenchScrewdriver } from "react-icons/hi2";
+import illustration1 from "../../../assets/Rectangle 80.png"
+import illustration2 from "../../../assets/Rectangle 81.png"
+import illustration3 from "../../../assets/Rectangle 83.png"
+import { FiArrowRight } from "react-icons/fi"
+import { motion, useInView } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
+import api from "../../../api/axios"
+
+interface Icone {
+    url: string
+    public_id: string
+}
+
+interface Skills {
+    id: number
+    name: string
+    image: Icone
+    level: string
+    description: string
+}
+
+interface Languages {
+    id: number,
+    name: string,
+    icone: Icone
+}
+
+interface Category {
+    id: number
+    name: string
+    icone: string
+    active: boolean
+    Skills: Skills
+}
 
 function Languages() {
-    const languages = [
-        { name: "HTML", icon: <FaHtml5 />, color: "hover:text-[#E34F26]" },
-        { name: "CSS", icon: <FaCss3Alt />, color: "hover:text-[#1572B6]" },
-        { name: "JavaScript", icon: <FaJs />, color: "hover:text-[#F7DF1E]" },
-        { name: "TypeScript", icon: <SiTypescript />, color: "hover:text-blue-500" },
-        { name: "PHP", icon: <FaPhp />, color: "hover:text-[#777BB4]" },
-        { name: "Python", icon: <FaPython />, color: "hover:text-blue-600" },
-        { name: "C++", icon: <SiCplusplus />, color: "hover:text-blue-700" },
-        { name: "C", icon: <SiC />, color: "hover:text-gray-400" },
-        { name: "Dart", icon: <FaDartLang />, color: "hover:text-blue-400" },
-        { name: "Java", icon: <FaJava />, color: "hover:text-red-600" },
-        { name: "SQL", icon: <SiDatabricks />, color: "hover:text-blue-500" },
-    ];
+
+    const [languages, setLanguages] = useState<Languages[] | null>(null)
+    const [categories, setCategories] = useState<Category[] | null>(null)
 
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-    const categories = [
-        { title: "Web & Mobile", icon: <HiCode size={22} />, active: false },
-        { title: "IA & Big Data", icon: <HiChartBar size={22} />, active: true },
-        { title: "Tools & Infra", icon: <HiOutlineWrenchScrewdriver size={22} />, active: false }
-    ];
+    useEffect(() => {
+        const fetchLanguages = async () => {
+            try {
+
+                const res = await api.get("/langages/all")
+                if(!res.data.success) return alert(res.data.message)
+                const data: Languages[] = res.data.languages
+                setLanguages(data)
+                
+            } catch (error) {
+                console.log("Erreur: ", error)
+            }
+        }
+
+        fetchLanguages()
+    }, [])
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+
+                const res = await api.get("/categories/all")
+                if(!res.data.success) return alert(res.data.success)
+                
+                const data: Category[] = res.data.categories
+                setCategories(data)
+                
+            } catch (error) {
+                console.log("Erreur: ", error)
+            }
+        }
+
+        fetchCategories()
+    }, [])
 
     return (
         <section className="w-full py-24 bg-white overflow-hidden">
@@ -40,18 +82,18 @@ function Languages() {
             {/* --- TOP : GRILLE FIXE DES LANGAGES (Badge Style) --- */}
             <div className="max-w-7xl mx-auto px-6 mb-24">
                 <div className="flex flex-wrap justify-center gap-4">
-                    {languages.map((lang, index) => (
+                    {languages?.map((lang, index) => (
                         <motion.div 
                             key={index}
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.05 }}
                             whileHover={{ y: -5 }}
-                            className={`flex items-center gap-3 px-6 py-3 bg-white rounded-2xl border border-gray-100 shadow-sm text-gray-400 transition-all duration-300 ${lang.color} hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/5 cursor-default`}
+                            className={`flex items-center gap-3 px-6 py-3 bg-white rounded-2xl border border-gray-100 shadow-sm text-gray-400 transition-all duration-300 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/5 cursor-default`}
                         >
-                            <span className="text-xl transition-transform duration-300 group-hover:scale-110">
-                                {lang.icon}
-                            </span>
+                            <motion.div className=" w-6 h-6">
+                                <img src={lang.icone.url} alt="" />
+                            </motion.div>
                             <span className="font-black text-[10px] uppercase tracking-[0.2em] text-gray-900">
                                 {lang.name}
                             </span>
@@ -137,7 +179,7 @@ function Languages() {
                     </div>
 
                     <div className="space-y-4 px-5 lg:px-0">
-                        {categories.map((cat, index) => (
+                        {categories?.map((cat, index) => (
                             <motion.div
                                 key={index}
                                 className={`flex items-center justify-between p-6 rounded-[30px] transition-all duration-300 group cursor-pointer border-2 ${
@@ -149,10 +191,8 @@ function Languages() {
                                 <div className="flex items-center gap-6">
                                     <div className={`p-4 rounded-2xl transition-colors ${
                                         cat.active ? "bg-blue-500 text-white" : "bg-gray-50 text-blue-500 group-hover:bg-blue-500 group-hover:text-white"
-                                    }`}>
-                                        {cat.icon}
-                                    </div>
-                                    <span className="text-xl font-black uppercase tracking-tighter">{cat.title}</span>
+                                    }`} dangerouslySetInnerHTML={{ __html: cat.icone }} />
+                                    <span className="text-xl font-black uppercase tracking-tighter">{cat.name}</span>
                                 </div>
                                 <FiArrowRight className={`transition-transform duration-300 group-hover:translate-x-2 ${cat.active ? "text-blue-500" : "text-gray-200"}`} />
                             </motion.div>
