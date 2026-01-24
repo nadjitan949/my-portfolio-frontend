@@ -1,16 +1,20 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image1 from "../../../assets/Rectangle 113 (1).png";
 import Image2 from "../../../assets/Rectangle 113.png";
+import Button from "../../../ui/Button";
+import FormInterests from "../../../components/FormInterests";
 
 function ServicesHead() {
-  const containerRef = useRef(null);
+
+  const [openForm, setOpenForm] = useState<boolean>(false)
+
+  const containerRef = useRef(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
-  });
+  })
 
-  // Effet de parallaxe différencié pour un aspect premium
   const yImage1 = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const yImage2 = useTransform(scrollYProgress, [0, 1], [0, 40]);
   const scaleText = useTransform(scrollYProgress, [0, 0.5], [0.95, 1]);
@@ -97,19 +101,21 @@ function ServicesHead() {
               </div>
 
               <div className="pt-6">
-                <button className="relative inline-flex items-center justify-center px-10 py-5 overflow-hidden font-bold text-white transition-all duration-300 bg-black rounded-full group">
+                <Button onClick={() => setOpenForm(true)} className="relative inline-flex items-center justify-center px-10 py-5 overflow-hidden font-bold text-white transition-all duration-300 bg-black rounded-full group">
                   <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-blue-500 group-hover:translate-x-0 ease">
                     <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                   </span>
                   <span className="absolute flex items-center justify-center w-full h-full text-white transition-all duration-300 transform group-hover:translate-x-full ease">DÉBUTER UN PROJET</span>
                   <span className="relative invisible">DÉBUTER UN PROJET</span>
-                </button>
+                </Button>
               </div>
             </div>
           </div>
         </motion.div>
 
       </div>
+
+      {openForm && (<FormInterests onClose={() => setOpenForm(false)}/>)}
     </section>
   );
 }

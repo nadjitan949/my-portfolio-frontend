@@ -4,6 +4,7 @@ import Button from '../../../ui/Button'
 import { useEffect, useState } from 'react'
 import api from '../../../api/axios'
 import { useNavigate } from 'react-router-dom'
+import FormInterests from '../../../components/FormInterests'
 
 interface Image {
   url: string
@@ -28,10 +29,16 @@ interface Service {
 function ServicesList() {
 
   const [services, setServices] = useState<Service[] | null>(null)
+  const [selectedService, setSelectedService] = useState<number | null>(null)
+  const [openForm, setOpenForm] = useState<boolean>(false)
 
   const navigate = useNavigate()
 
   const showDetails = (id: number) => navigate(`/service/details/${id}`)
+  const selectService = (id: number) => {
+    setSelectedService(id)
+    setOpenForm(true)
+  }
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -110,7 +117,7 @@ function ServicesList() {
                   </div>
 
                   <div className="flex gap-3">
-                    <Button className="bg-black text-white px-5 py-2 md:px-8 md:py-3 rounded-full font-bold text-[12px] md:text-sm hover:bg-gray-800 transition-all">
+                    <Button onClick={() => selectService(service.id)} className="bg-black text-white px-5 py-2 md:px-8 md:py-3 rounded-full font-bold text-[12px] md:text-sm hover:bg-gray-800 transition-all">
                       Intéressé
                     </Button>
                     <Button onClick={() => showDetails(service.id)} className="bg-white text-gray-900 border border-gray-300 px-8 py-3 rounded-full font-bold text-[12px] md:text-sm hover:bg-gray-50 transition-all">
@@ -123,6 +130,9 @@ function ServicesList() {
           </div>
         )
       })}
+
+      {openForm && (<FormInterests serviceId={selectedService} onClose={() => setOpenForm(false)} />)}
+
     </section>
   )
 }

@@ -4,10 +4,14 @@ import BoxBack1 from "../assets/Rectangle 63.png"
 import BoxBack2 from "../assets/Rectangle 65.png"
 import Button from "../ui/Button"
 import { useNavigate } from "react-router-dom"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
+import FormInterests from "./FormInterests"
 
 function Footer() {
+
+    const [openForm, setOpenForm] = useState<boolean>(false)
+
     const navigate = useNavigate()
     const ref = useRef(null)
     const isInView = useInView(ref, { once: false, margin: "-10px" })
@@ -62,8 +66,8 @@ function Footer() {
                                 Transformons votre projet en une réalité concrète et performante.
                             </p>
                             <div className="pt-2">
-                                <Button className="w-full lg:w-auto px-10 py-4 bg-black text-white rounded-full font-bold uppercase text-xs tracking-widest hover:bg-gray-800 transition-colors">
-                                    Demander un devis
+                                <Button onClick={() => setOpenForm(true)} className="w-full lg:w-auto px-10 py-4 bg-black text-white rounded-full font-bold uppercase text-xs tracking-widest hover:bg-gray-800 transition-colors">
+                                    Interessé par un service
                                 </Button>
                             </div>
                         </div>
@@ -125,6 +129,8 @@ function Footer() {
                     </p>
                 </div>
             </motion.div>
+
+            {openForm && (<FormInterests onClose={() => setOpenForm(false)}/>)}
         </footer>
     )
 }

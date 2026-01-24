@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Button from '../../../ui/Button'
 import { useEffect, useState } from 'react'
 import api from '../../../api/axios'
+import FormInterests from '../../../components/FormInterests'
 
 // Interfaces (Inchangées)
 interface Image { url: string; public_id: string }
@@ -11,7 +12,9 @@ interface Service { id: number; title: string; image: Image; description: string
 
 function ServicesDetails() {
     const [service, setService] = useState<Service | null>(null)
-    const [loading, setLoading] = useState(true) // État de chargement
+    const [loading, setLoading] = useState<boolean>(true) // État de chargement
+    const [openForm, setOpenForm] = useState<boolean>(false)
+
     const navigate = useNavigate()
     const { id } = useParams()
 
@@ -116,7 +119,7 @@ function ServicesDetails() {
                                 Prêt à démarrer ? <FiArrowUpRight />
                             </h3>
                             <div className="space-y-6">
-                                <Button className="w-full py-5 bg-white text-black font-black uppercase tracking-widest rounded-xl hover:bg-white hover:text-black transition-all duration-500 shadow-lg">
+                                <Button onClick={() => setOpenForm(true)} className="w-full py-4 bg-white text-black font-bold uppercase tracking-widest rounded-xl hover:bg-white hover:text-black transition-all duration-500 shadow-lg">
                                     Lancer le projet
                                 </Button>
                             </div>
@@ -130,8 +133,11 @@ function ServicesDetails() {
                     </div>
                 </div>
             </div>
+
+            {openForm && (<FormInterests serviceId={id ? Number(id) : undefined} onClose={() => setOpenForm(false)}/>)}
+
         </section>
     );
 }
 
-export default ServicesDetails;
+export default ServicesDetails
