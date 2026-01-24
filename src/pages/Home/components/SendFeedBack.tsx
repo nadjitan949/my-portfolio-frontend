@@ -82,7 +82,7 @@ function SendFeedBack({ onClose }: SendFeedBackProps) {
                     {/* Square Image Picker */}
                     <div className="flex justify-center">
                         <div className="relative group cursor-pointer" onClick={() => fileInputRef.current?.click()}>
-                            <div className="w-28 h-28 rounded-[2rem] overflow-hidden shadow-2xl shadow-blue-500/10 ring-4 ring-slate-50 transition-transform group-hover:scale-105 active:scale-95">
+                            <div className="w-28 h-28 rounded-4xl overflow-hidden shadow-2xl shadow-blue-500/10 ring-4 ring-slate-50 transition-transform group-hover:scale-105 active:scale-95">
                                 <img src={preview || defaultAvatar} className="w-full h-full object-cover" alt="Avatar" />
                                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                                     <FiCamera className="text-white" size={24} />
