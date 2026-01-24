@@ -63,7 +63,7 @@ function Review() {
   }
 
   // Review actuelle
-  const currentReview = reviews[currentIndex];
+  const currentReview = reviews[currentIndex]
 
   return (
     <section className="w-full h-250 relative flex flex-col gap-5 items-center justify-center">
