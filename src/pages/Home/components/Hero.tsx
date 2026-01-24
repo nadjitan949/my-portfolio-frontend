@@ -1,13 +1,18 @@
 import { FiArrowRight, FiDownload } from "react-icons/fi"
 import BlueHero from "../../../assets/pngwing.com (2) 1.png"
 import VioletHero from "../../../assets/Rectangle 59 (1).png"
-import PoseOne from "../../../assets/upscalemedia-transformed 1.png"
 import YellowHero from "../../../assets/Rectangle 59.png"
 import Button from "../../../ui/Button"
 import { FaGithub, FaLinkedin } from "react-icons/fa6"
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import MyCV from "../../../cv/Nadjitan_betan.pdf"
+import { GrGoogle } from "react-icons/gr"
+import { BsWhatsapp } from "react-icons/bs"
+
+const PoseOne = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769281530/upscalemedia-transformed_1_y1amsj.png"
+const PoseTwo = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769281502/upscalemedia-transformed_bzklw2.png"
+const PoseThree = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769282392/Gemini_Generated_Image_b92ot2b92ot2b92o-removebg-preview_bxwloo.png"
 
 function Hero() {
     const [activeIndex, setActiveIndex] = useState(0)
@@ -128,12 +133,18 @@ function Hero() {
                                             </Button>
 
                                             <div className="flex gap-2">
-                                                <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white">
+                                                <a href="https://github.com/nadjitan949" className="w-10 h-10 rounded-full flex items-center justify-center bg-white">
                                                     <FaGithub size={25} />
-                                                </div>
-                                                <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white">
+                                                </a>
+                                                <a href="https://www.linkedin.com/in/nadjitan-betan-2a52b83a4/" className="w-10 h-10 rounded-full flex items-center justify-center bg-white">
                                                     <FaLinkedin size={25} className="text-[#2375C2]" />
-                                                </div>
+                                                </a>
+                                                <a href="https://wa.me/22896717742" className="w-10 h-10 rounded-full flex items-center justify-center bg-white">
+                                                    <BsWhatsapp size={25} className="text-green-500" />
+                                                </a>
+                                                <a href="mailto:nadjitanb@gmail.com.com" className="w-10 h-10 rounded-full flex items-center justify-center bg-white">
+                                                    <GrGoogle size={25} className="text-red-500" />
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -170,8 +181,8 @@ function Hero() {
                         <AnimatePresence>
                             {activeIndex !== 1 && (
                                 <motion.div
-                                    key="overlay" // important pour que Framer Motion gère correctement l'animation exit
-                                    initial={{ opacity: 0 }}      // état au montage
+                                    key="overlay"
+                                    initial={{ opacity: 0 }}      
                                     animate={{ opacity: 0.4 }}    // état quand actif
                                     exit={{ opacity: 0 }}         // état au démontage
                                     transition={{ duration: 0.9 }} // durée de la transition
@@ -208,7 +219,6 @@ function Hero() {
                                             </p>
                                         </div>
 
-                                        {/* Stats : Grid 1 col sur mobile, 3 sur Laptop/Desktop */}
                                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 xl:gap-6 mt-4 xl:mt-10">
                                             {[
                                                 { label: "Projets livrés", val: "+25", grow: "↑ croissance" },
@@ -241,7 +251,7 @@ function Hero() {
                                     </div>
 
                                     <div className="absolute w-70 xl:w-100 bottom-0 right-0 ">
-                                        <img src={PoseOne} alt="" />
+                                        <img src={PoseTwo} alt="" />
                                     </div>
 
                                     <div className="absolute -bottom-2 -right-2 flex flex-col items-end">
@@ -318,7 +328,7 @@ function Hero() {
                                     {/* IMAGE - Fluide : plus petite sur laptop (lg), taille d'origine sur xl */}
                                     <div className="absolute bottom-0 right-0 w-[50%] md:w-[40%] xl:w-96 pointer-events-none opacity-40 lg:opacity-90 z-0">
                                         <img
-                                            src={PoseOne}
+                                            src={PoseThree}
                                             alt=""
                                             className="max-h-[60%] lg:max-h-[85%] w-full object-contain object-bottom-right"
                                         />
@@ -470,7 +480,7 @@ function Hero() {
                                 </div>
 
                                 <div className="absolute bottom-0 right-0 w-40 md:w-65 pointer-events-none">
-                                    <img src={PoseOne} alt="" className="w-full object-contain" />
+                                    <img src={PoseTwo} alt="" className="w-full object-contain" />
                                 </div>
                                 <div className="absolute bottom-4 right-4">
                                     <Button onClick={() => { nextIndex() }} className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center border-4 border-white">
@@ -507,7 +517,7 @@ function Hero() {
                                     <div className="border-t border-black/20 pt-2"><span className="text-[10px] block">04</span><h4 className="font-bold text-xs">Delivery</h4></div>
                                 </div>
                                 <div className="absolute bottom-0 right-0 w-40 md:w-65 pointer-events-none">
-                                    <img src={PoseOne} alt="" className="w-full object-contain" />
+                                    <img src={PoseThree} alt="" className="w-full object-contain" />
                                 </div>
                                 <div className="absolute bottom-4 right-4">
                                     <Button

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { FiArrowDownRight, FiSend } from 'react-icons/fi';
-import { FaLinkedinIn, FaGithub, FaInstagram } from 'react-icons/fa6';
+import { FaLinkedinIn, FaGithub, FaWhatsapp } from 'react-icons/fa6';
+import { GrGoogle } from 'react-icons/gr';
 
 function ContactHead() {
   return (
@@ -43,9 +44,10 @@ function ContactHead() {
             className="flex flex-wrap gap-6"
           >
             {[
-              { icon: <FaLinkedinIn />, label: "LinkedIn" },
-              { icon: <FaGithub />, label: "Github" },
-              { icon: <FaInstagram />, label: "Instagram" }
+              { icon: <FaLinkedinIn />, label: "LinkedIn", link: "https://www.linkedin.com/in/nadjitan-betan-2a52b83a4/" },
+              { icon: <FaGithub />, label: "Github", link: "https://github.com/nadjitan949" },
+              { icon: <FaWhatsapp />, label: "Whatsapp", link: "https://wa.me/22896717742" },
+              { icon: <GrGoogle />, label: "Email", link: "mailto:nadjitanb@gmail.com" }
             ].map((social, i) => (
               <a 
                 key={i} 

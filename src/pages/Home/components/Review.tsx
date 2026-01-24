@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react"
-import RevewBackground from "../../../assets/Rectangle 60 (1).png"
 import { motion, AnimatePresence } from "framer-motion"
 import Button from "../../../ui/Button"
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi"
 import api from "../../../api/axios"
 import { BiUser } from "react-icons/bi"
 import ReviewForm from "./ReviewForm"
+
+const RevewBackground = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284976/Rectangle_60_1_ckeayo.png"
 
 interface Review {
   id: number

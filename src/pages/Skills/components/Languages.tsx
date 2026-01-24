@@ -1,10 +1,11 @@
-import illustration1 from "../../../assets/Rectangle 80.png"
-import illustration2 from "../../../assets/Rectangle 81.png"
-import illustration3 from "../../../assets/Rectangle 83.png"
 import { FiArrowRight } from "react-icons/fi"
 import { motion, useInView } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 import api from "../../../api/axios"
+
+const illustration1 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284167/Rectangle_80_p0kyx2.png"
+const illustration2 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284141/Rectangle_81_ezmjwq.png"
+const illustration3 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284151/Rectangle_83_zgkill.png"
 
 interface Icone {
     url: string

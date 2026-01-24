@@ -2,9 +2,9 @@ import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi"; // Un petit plus pour le look pro
 
-import Background from "../../../assets/Back.png";
-import HeadImage1 from "../../../assets/Rectangle 95 (1).png";
-import HeadImage2 from "../../../assets/Rectangle 95.png";
+const Background = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284520/Back_ae8fpc.png"
+const HeadImage1 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284524/Rectangle_95_1_vc13jk.png"
+const HeadImage2 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284582/Rectangle_95_xpbpgm.png"
 
 const containerVariants = {
   hidden: { opacity: 0 },

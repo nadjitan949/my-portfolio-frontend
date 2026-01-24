@@ -1,11 +1,16 @@
 import { FiCalendar, FiCheckCircle, FiPenTool, FiSearch, FiUploadCloud } from "react-icons/fi"
-import DeskImage from "../../../assets/Rectangle 59l.png"
-import Background from "../../../assets/Rectangle 60.png"
 import Button from "../../../ui/Button"
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
+import { useNavigate } from "react-router-dom"
+
+const DeskImage = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284860/Rectangle_59l_vurfvy.png"
+const Background = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284843/Rectangle_60_mv4b1f.png"
 
 function WorkFlow() {
+
+    const navigate = useNavigate()
+    const gotoServices = () => navigate("/services")
 
     const leftRef = useRef<HTMLDivElement | null>(null)
     const rightRef = useRef<HTMLDivElement | null>(null)
@@ -74,9 +79,9 @@ function WorkFlow() {
 
                         <motion.div variants={itemFromLeft} initial="hidden" animate={isLeftInView ? "visible" : "hidden"} className="flex items-center gap-4">
                             <div className="flex -space-x-5">
-                                <img src="https://i.pravatar.cc/100?img=12" alt="" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
-                                <img src="https://i.pravatar.cc/100?img=32" alt="" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
-                                <img src="https://i.pravatar.cc/100?img=45" alt="" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
+                                <img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" alt="" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
+                                <img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" alt="" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
+                                <img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" alt="" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
                                 <div className="w-8 h-8 md:w-12 md:h-12 rounded-full backdrop-blur-md border-2 border-white flex items-center justify-center text-sm font-semibold text-white">
                                     +30
                                 </div>
@@ -88,7 +93,7 @@ function WorkFlow() {
                         </motion.div>
 
                         <motion.div variants={itemFromLeft} initial="hidden" animate={isLeftInView ? "visible" : "hidden"} className="mt-auto">
-                            <Button className="font-semibold bg-white px-5 py-3 rounded-[5px] hover:bg-transparent hover:text-white">Mes services</Button>
+                            <Button onClick={gotoServices} className="font-semibold bg-white px-5 py-3 rounded-[5px] hover:bg-transparent hover:text-white">Mes services</Button>
                         </motion.div>
                     </div>
                 </motion.div>

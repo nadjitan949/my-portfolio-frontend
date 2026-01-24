@@ -3,6 +3,7 @@ import { FiSend, FiUser, FiMail, FiMessageCircle, FiPhone, FiMapPin } from 'reac
 import Button from '../../../ui/Button'
 import React, { useState } from 'react'
 import api from '../../../api/axios'
+import { BsGoogle } from 'react-icons/bs'
 
 function ContactForm() {
 
@@ -68,6 +69,12 @@ function ContactForm() {
                   <FiPhone size={20} />
                 </div>
                 <span className="font-bold">+228 96 71 77 42</span>
+              </div>
+              <div className="flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-black transition-all">
+                  <BsGoogle size={20} />
+                </div>
+                <span className="font-bold">nadjitanb@gmail.com</span>
               </div>
               <div className="flex items-center gap-4 group">
                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-black transition-all">

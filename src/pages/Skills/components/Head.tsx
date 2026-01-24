@@ -1,10 +1,11 @@
-import SkillsPose from "../../../assets/Rectangle 69.png";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useInView } from "framer-motion"
+import { useRef } from "react"
+
+const SkillsPose = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769281555/Rectangle_69_bt49yd.png"
 
 function Content() {
-    const sectionRef = useRef(null);
-    const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+    const sectionRef = useRef(null)
+    const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
 
     /* Variants d'animation */
     const containerVariants = {

@@ -1,9 +1,10 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
-import Image1 from "../../../assets/Rectangle 113 (1).png";
-import Image2 from "../../../assets/Rectangle 113.png";
-import Button from "../../../ui/Button";
-import FormInterests from "../../../components/FormInterests";
+import { motion, useScroll, useTransform } from "framer-motion"
+import { useRef, useState } from "react"
+import Button from "../../../ui/Button"
+import FormInterests from "../../../components/FormInterests"
+
+const Image1 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284715/Rectangle_113_1_ydr5wk.png"
+const Image2 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284696/Rectangle_113_tbew7v.png"
 
 function ServicesHead() {
 

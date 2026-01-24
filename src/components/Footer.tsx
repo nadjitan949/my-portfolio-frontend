@@ -1,12 +1,14 @@
-import { FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi"
-import Pose3d from "../assets/Rectangle 62.png"
-import BoxBack1 from "../assets/Rectangle 63.png"
-import BoxBack2 from "../assets/Rectangle 65.png"
+import { FiGithub, FiLinkedin } from "react-icons/fi"
 import Button from "../ui/Button"
 import { useNavigate } from "react-router-dom"
 import { useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
 import FormInterests from "./FormInterests"
+import { BsGoogle, BsWhatsapp } from "react-icons/bs"
+
+const Pose3d = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284310/Rectangle_62_zoqcxz.png"
+const BoxBack1 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284331/Rectangle_63_iscier.png"
+const BoxBack2 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284323/Rectangle_65_o4jotp.png"
 
 function Footer() {
 
@@ -23,6 +25,25 @@ function Footer() {
         { name: "Projets", action: () => navigate("projects") },
         { name: "Services", action: () => navigate("services") },
         { name: "Contact", action: () => navigate("contact") },
+    ]
+
+    const socials = [
+        {
+            icon: FiGithub,
+            link: "https://github.com/nadjitan949",
+        },
+        {
+            icon: FiLinkedin,
+            link: "https://www.linkedin.com/in/nadjitan-betan-2a52b83a4/",
+        },
+        {
+            icon: BsWhatsapp,
+            link: "https://wa.me/22896717742",
+        },
+        {
+            icon: BsGoogle,
+            link: "mailto:nadjitanb@gmail.com",
+        },
     ]
 
     return (
@@ -46,7 +67,7 @@ function Footer() {
 
                     {/* Contenu de la Box */}
                     <div className="relative z-10 w-full h-full flex flex-col lg:flex-row items-center lg:items-end px-6 lg:px-12 py-8 lg:py-0">
-                        
+
                         {/* Image Pose 3D - Ajustée pour mobile */}
                         <motion.div
                             initial={{ x: 50, opacity: 0 }}
@@ -85,7 +106,7 @@ function Footer() {
                 {/* Avatar & Nom */}
                 <div className="flex flex-col items-center gap-4">
                     <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-blue-500 shadow-lg shadow-blue-500/20">
-                        <img src="https://i.pravatar.cc/150?img=32" className="w-full h-full object-cover" alt="Profile" />
+                        <img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" className="w-full h-full object-cover" alt="Profile" />
                     </div>
                     <h3 className="text-2xl lg:text-3xl font-black text-white uppercase tracking-tighter">
                         Benjamin Nadjitan
@@ -96,8 +117,8 @@ function Footer() {
                 <ul className="grid grid-cols-2 md:grid-cols-3 lg:flex gap-x-8 gap-y-4 text-center">
                     {navLinks.map((link) => (
                         <li key={link.name}>
-                            <button 
-                                onClick={link.action} 
+                            <button
+                                onClick={link.action}
                                 className="text-gray-400 hover:text-white transition-colors text-sm font-medium uppercase tracking-widest"
                             >
                                 {link.name}
@@ -108,18 +129,22 @@ function Footer() {
 
                 {/* Réseaux Sociaux */}
                 <div className="flex gap-8">
-                    {[FiGithub, FiLinkedin, FiTwitter].map((Icon, i) => (
-                        <motion.a
-                            key={i}
-                            href="#"
-                            initial={{ scale: 0 }}
-                            animate={isInView ? { scale: 1 } : {}}
-                            transition={{ duration: 0.4, delay: 0.6 + i * 0.1 }}
-                            className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white text-xl hover:bg-white hover:text-black transition-all"
-                        >
-                            <Icon />
-                        </motion.a>
-                    ))}
+                    <div className="flex gap-8">
+                        {socials.map(({ icon: Icon, link }, i) => (
+                            <motion.a
+                                key={i}
+                                href={link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                initial={{ scale: 0 }}
+                                animate={isInView ? { scale: 1 } : {}}
+                                transition={{ duration: 0.4, delay: 0.6 + i * 0.1 }}
+                                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white text-xl hover:bg-white hover:text-black transition-all"
+                            >
+                                <Icon />
+                            </motion.a>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Copyright */}
@@ -130,7 +155,7 @@ function Footer() {
                 </div>
             </motion.div>
 
-            {openForm && (<FormInterests onClose={() => setOpenForm(false)}/>)}
+            {openForm && (<FormInterests onClose={() => setOpenForm(false)} />)}
         </footer>
     )
 }
