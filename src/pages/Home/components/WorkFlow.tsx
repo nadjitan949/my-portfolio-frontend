@@ -15,7 +15,7 @@ function WorkFlow() {
     const leftRef = useRef<HTMLDivElement | null>(null)
     const rightRef = useRef<HTMLDivElement | null>(null)
     const gridRef = useRef<HTMLDivElement | null>(null);
-    const isGridInView = useInView(gridRef, { once: true, margin: "-50px" });
+    const isGridInView = useInView(gridRef, { once: true, margin: "-50px" })
 
     const isLeftInView = useInView(leftRef, { once: true, margin: "-100px" })
     const isRightInView = useInView(rightRef, { once: true, margin: "-100px" })
