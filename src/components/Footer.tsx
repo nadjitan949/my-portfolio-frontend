@@ -109,7 +109,7 @@ function Footer() {
                         <img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" className="w-full h-full object-cover" alt="Profile" />
                     </div>
                     <h3 className="text-2xl lg:text-3xl font-black text-white uppercase tracking-tighter">
-                        Benjamin Nadjitan
+                        Nadjitan Betan
                     </h3>
                 </div>
 
