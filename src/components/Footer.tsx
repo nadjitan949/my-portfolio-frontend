@@ -117,12 +117,12 @@ function Footer() {
                 <ul className="grid grid-cols-2 md:grid-cols-3 lg:flex gap-x-8 gap-y-4 text-center">
                     {navLinks.map((link) => (
                         <li key={link.name}>
-                            <button
+                            <Button
                                 onClick={link.action}
                                 className="text-gray-400 hover:text-white transition-colors text-sm font-medium uppercase tracking-widest"
                             >
                                 {link.name}
-                            </button>
+                            </Button>
                         </li>
                     ))}
                 </ul>

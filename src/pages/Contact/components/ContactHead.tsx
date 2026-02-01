@@ -51,7 +51,7 @@ function ContactHead() {
             ].map((social, i) => (
               <a 
                 key={i} 
-                href="#" 
+                href={social.link} 
                 className="group flex items-center gap-3 bg-black/5 border border-white/10 px-6 py-3 rounded-full hover:bg-blue-500 hover:text-black transition-all duration-500"
               >
                 <span className="text-lg">{social.icon}</span>
