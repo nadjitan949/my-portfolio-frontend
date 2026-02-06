@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion'
 import Button from '../../../ui/Button'
 import api from '../../../api/axios'
 import SendFeedBack from './SendFeedBack'
+import Img from '../../../ui/Img'
 
 interface Image {
     url: string
@@ -84,7 +85,7 @@ function Collabs() {
                         initial={{ opacity: 0 }}
                         animate={isInView ? { opacity: 0.2 } : {}}
                         className="hidden rounded-[20px] overflow-hidden lg:block w-24 h-24 diamond-shape mt-24">
-                        <img src={getImageUrl(getTestimonial(-2)?.image)} alt="" className="object-cover w-full h-full grayscale" />
+                        <Img src={getImageUrl(getTestimonial(-2)?.image)} alt={`${getTestimonial(0)?.author} avatar`} className="object-cover w-full h-full grayscale" />
                     </motion.div>
 
                     {/* Décoration Gauche - Index -1 */}
@@ -92,7 +93,7 @@ function Collabs() {
                         initial={{ x: 50, opacity: 0 }}
                         animate={isInView ? { x: 0, opacity: 0.5 } : {}}
                         className="hidden rounded-[20px] overflow-hidden sm:block w-40 h-40 diamond-shape mb-12 shadow-lg">
-                        <img src={getImageUrl(getTestimonial(-1)?.image)} alt="" className="object-cover w-full h-full grayscale" />
+                        <Img src={getImageUrl(getTestimonial(-1)?.image)} alt={`${getTestimonial(0)?.author} avatar`} className="object-cover w-full h-full grayscale" />
                     </motion.div>
 
                     {/* Témoignage Central */}
@@ -107,7 +108,7 @@ function Collabs() {
                                 className="flex flex-col items-center"
                             >
                                 <div className="w-48 h-48 md:w-60 md:h-60 diamond-shape shadow-2xl rounded-[30px] overflow-hidden border-4 border-white pentagon-shape">
-                                    <img src={getImageUrl(getTestimonial(0)?.image)} alt="" className="object-cover w-full h-full" />
+                                    <Img src={getImageUrl(getTestimonial(0)?.image)} alt={`${getTestimonial(0)?.author} avatar`} className="object-cover w-full h-full" />
                                 </div>
 
                                 <div className="mt-10 max-w-md">
@@ -126,7 +127,7 @@ function Collabs() {
                         initial={{ x: -50, opacity: 0 }}
                         animate={isInView ? { x: 0, opacity: 0.5 } : {}}
                         className="hidden sm:block w-40 rounded-[20px] overflow-hidden h-40 diamond-shape mb-12 shadow-lg pentagon-shape">
-                        <img src={getImageUrl(getTestimonial(1)?.image)} alt="" className="object-cover w-full h-full grayscale" />
+                        <Img src={getImageUrl(getTestimonial(1)?.image)} alt="Avatar collaborateur" className="object-cover w-full h-full grayscale" />
                     </motion.div>
 
                     {/* Décoration Droite - Index +2 */}
@@ -134,7 +135,7 @@ function Collabs() {
                         initial={{ opacity: 0 }}
                         animate={isInView ? { opacity: 0.2 } : {}}
                         className="hidden rounded-[20px] overflow-hidden lg:block w-24 h-24 diamond-shape mt-24 pentagon-shape">
-                        <img src={getImageUrl(getTestimonial(2)?.image)} alt="" className="object-cover w-full h-full grayscale" />
+                        <Img src={getImageUrl(getTestimonial(2)?.image)} alt={`${getTestimonial(0)?.author} avatar`} className="object-cover w-full h-full grayscale" />
                     </motion.div>
 
                 </div>

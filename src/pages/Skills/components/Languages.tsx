@@ -2,6 +2,7 @@ import { FiArrowRight } from "react-icons/fi"
 import { motion, useInView } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 import api from "../../../api/axios"
+import Img from "../../../ui/Img"
 
 const illustration1 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284167/Rectangle_80_p0kyx2.png"
 const illustration2 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284141/Rectangle_81_ezmjwq.png"
@@ -93,7 +94,7 @@ function Languages() {
                             className={`flex items-center gap-3 px-6 py-3 bg-white rounded-2xl border border-gray-100 shadow-sm text-gray-400 transition-all duration-300 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/5 cursor-default`}
                         >
                             <motion.div className=" w-6 h-6">
-                                <img src={lang.icone.url} alt="" />
+                                <Img src={lang.icone.url} alt={lang.name} />
                             </motion.div>
                             <span className="font-black text-[10px] uppercase tracking-[0.2em] text-gray-900">
                                 {lang.name}
@@ -114,7 +115,7 @@ function Languages() {
                              whileInView={{ opacity: 1, scale: 1 }}
                              className="rounded-[40px] overflow-hidden border-4 border-white shadow-xl"
                         >
-                            <img src={illustration3} className="w-full h-44 object-cover" alt="" />
+                            <Img src={illustration3} className="w-full h-44 object-cover" />
                         </motion.div>
                         <motion.div 
                              initial={{ opacity: 0, scale: 0.9 }}
@@ -122,7 +123,7 @@ function Languages() {
                              transition={{ delay: 0.1 }}
                              className="rounded-[40px] overflow-hidden border-4 border-white shadow-xl"
                         >
-                            <img src={illustration1} className="w-full h-64 object-cover font-bold" alt="" />
+                            <Img src={illustration1} alt="Immage d'illustration" className="w-full h-64 object-cover font-bold" />
                         </motion.div>
                     </div>
                     <div className="space-y-4">
@@ -132,7 +133,7 @@ function Languages() {
                              transition={{ delay: 0.2 }}
                              className="rounded-[40px] overflow-hidden border-4 border-white shadow-xl"
                         >
-                            <img src={illustration2} className="w-full h-80 object-cover" alt="" />
+                            <Img src={illustration2} alt="Image d'illustration" className="w-full h-80 object-cover"/>
                         </motion.div>
                         
                         {/* Carte Stats Bleu-500 */}

@@ -5,6 +5,7 @@ import Button from '../../../ui/Button'
 import { useEffect, useState } from 'react'
 import api from '../../../api/axios'
 import FormInterests from '../../../components/FormInterests'
+import Img from '../../../ui/Img'
 
 // Interfaces (Inchangées)
 interface Image { url: string; public_id: string }
@@ -98,7 +99,7 @@ function ServicesDetails() {
                     {/* Image & Content */}
                     <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }} className="lg:col-span-7 relative">
                         <div className="aspect-video w-full rounded-3xl overflow-hidden border border-gray-100 shadow-2xl">
-                            <img src={service.image.url} alt={service.title} className="w-full h-full object-cover transition-all duration-1000" />
+                            <Img src={service.image.url} alt={service.title} className="w-full h-full object-cover transition-all duration-1000" />
                         </div>
 
                         {/* CORRECTIF ICI : Valeur par défaut "" pour éviter l'erreur de type */}

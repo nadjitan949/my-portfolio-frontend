@@ -4,6 +4,7 @@ import Button from '../../../ui/Button'
 import React, { useState } from 'react'
 import api from '../../../api/axios'
 import { BsGoogle } from 'react-icons/bs'
+import Img from '../../../ui/Img'
 
 function ContactForm() {
 
@@ -46,9 +47,9 @@ function ContactForm() {
         {/* --- PARTIE GAUCHE : IMAGE & INFOS (Visuel) --- */}
         <div className="lg:w-5/12 relative min-h-100 bg-black overflow-hidden">
           {/* Image illustrative (Abstraite ou Bureau Moderne) */}
-          <img
+          <Img
             src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=1000"
-            alt="Contact Visual"
+            alt="Image d'illustration"
             className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale hover:scale-110 transition-transform duration-1000"
           />
 

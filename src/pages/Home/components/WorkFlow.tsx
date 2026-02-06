@@ -3,6 +3,7 @@ import Button from "../../../ui/Button"
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { useNavigate } from "react-router-dom"
+import Img from "../../../ui/Img"
 
 const DeskImage = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284860/Rectangle_59l_vurfvy.png"
 const Background = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284843/Rectangle_60_mv4b1f.png"
@@ -65,7 +66,7 @@ function WorkFlow() {
                     transition={{ duration: 0.1 }}
                     className="h-150 lg:w-[45%] rounded-[40px] relative overflow-hidden flex items-center justify-center"
                 >
-                    <img src={DeskImage} alt="" className="object-cover w-full h-full" />
+                    <Img src={DeskImage} alt="Arrière paln illustration" className="object-cover w-full h-full" />
                     <div className="absolute w-full h-full bg-black/50 p-10 md:p-15 flex flex-col gap-10">
                         <motion.div variants={itemFromLeft} initial="hidden" animate={isLeftInView ? "visible" : "hidden"}>
                             <span className="text-white text-4xl font-medium">Organisation</span>
@@ -79,9 +80,9 @@ function WorkFlow() {
 
                         <motion.div variants={itemFromLeft} initial="hidden" animate={isLeftInView ? "visible" : "hidden"} className="flex items-center gap-4">
                             <div className="flex -space-x-5">
-                                <img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" alt="" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
-                                <img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" alt="" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
-                                <img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" alt="" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
+                                <Img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" alt="Avatar collaborateurs" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
+                                <Img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" alt="Avatar collaborateurs" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
+                                <Img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" alt="Avatar collaborateurs" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
                                 <div className="w-8 h-8 md:w-12 md:h-12 rounded-full backdrop-blur-md border-2 border-white flex items-center justify-center text-sm font-semibold text-white">
                                     +30
                                 </div>
@@ -107,7 +108,7 @@ function WorkFlow() {
                     transition={{ duration: 0.8 }}
                     className="h-190 lg:h-150 lg:w-[40%] rounded-[40px] relative overflow-hidden flex items-center justify-center"
                 >
-                    <img src={Background} alt="" className="object-cover w-full h-full" />
+                    <Img src={Background} alt="Arrière plan illustration" className="object-cover w-full h-full" />
                     <div className="absolute w-full h-full p-8 md:p-15 flex flex-col gap-12">
                         {/* Titre + texte */}
                         <motion.div variants={itemFromRight} initial="hidden" animate={isRightInView ? "visible" : "hidden"} className="flex flex-col gap-10 max-w-120">

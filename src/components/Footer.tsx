@@ -5,6 +5,7 @@ import { useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
 import FormInterests from "./FormInterests"
 import { BsGoogle, BsWhatsapp } from "react-icons/bs"
+import Img from "../ui/Img"
 
 const Pose3d = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284310/Rectangle_62_zoqcxz.png"
 const BoxBack1 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284331/Rectangle_63_iscier.png"
@@ -61,8 +62,8 @@ function Footer() {
                 >
                     {/* Images de fond décoratives (masquées sur petit mobile pour clarté) */}
                     <div className="absolute inset-0 flex justify-between pointer-events-none opacity-50 lg:opacity-100">
-                        <img src={BoxBack1} className="h-full object-cover hidden sm:block" alt="" />
-                        <img src={BoxBack2} className="h-full object-cover hidden sm:block" alt="" />
+                        <Img src={BoxBack1} className="h-full object-cover hidden sm:block" />
+                        <Img src={BoxBack2} className="h-full object-cover hidden sm:block" />
                     </div>
 
                     {/* Contenu de la Box */}
@@ -75,7 +76,7 @@ function Footer() {
                             transition={{ duration: 0.2, delay: 0.2 }}
                             className="w-40 lg:w-80 xl:w-100 mb-6 lg:mb-0"
                         >
-                            <img src={Pose3d} alt="Pose 3D" className="w-full h-auto object-contain" />
+                            <Img src={Pose3d} className="w-full h-auto object-contain" />
                         </motion.div>
 
                         {/* Texte & Bouton */}
@@ -106,7 +107,7 @@ function Footer() {
                 {/* Avatar & Nom */}
                 <div className="flex flex-col items-center gap-4">
                     <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-blue-500 shadow-lg shadow-blue-500/20">
-                        <img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" className="w-full h-full object-cover" alt="Profile" />
+                        <Img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" alt="Image footer" className="w-full h-full object-cover" />
                     </div>
                     <h3 className="text-2xl lg:text-3xl font-black text-white uppercase tracking-tighter">
                         Nadjitan Betan

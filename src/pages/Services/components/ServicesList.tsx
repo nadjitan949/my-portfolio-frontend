@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import api from '../../../api/axios'
 import { useNavigate } from 'react-router-dom'
 import FormInterests from '../../../components/FormInterests'
+import Img from '../../../ui/Img'
 
 interface Image {
   url: string
@@ -77,7 +78,7 @@ function ServicesList() {
               transition={{ duration: 0.5, ease: 'easeOut' }}
               className="relative z-20 w-full lg:rounded-t-none rounded-t-[15px] lg:w-[45%] h-64 md:h-80 overflow-hidden lg:shadow-xl"
             >
-              <img
+              <Img
                 src={service.image.url}
                 alt={service.title}
                 className="w-full h-full object-cover"

@@ -1,7 +1,7 @@
 import { FiLogIn, FiX, FiMenu, FiUser, FiLogOut } from "react-icons/fi"
 import Button from "../ui/Button"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useState, useEffect } from "react" // Ajout de useEffect
 import ChatWidget from "./ChatWidget"
 import AuthModal from "./AuthModal"
 
@@ -10,8 +10,28 @@ function Header() {
     const [authForm, setAuthForm] = useState<boolean>(false)
     const [isOnline, setIsOnline] = useState<boolean>(!!localStorage.getItem("token"))
 
-    const navigate = useNavigate()
+    // --- LOGIQUE SMART SCROLL ---
+    const [isVisible, setIsVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
 
+    useEffect(() => {
+        const controlNavbar = () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 100) {
+                // On descend ET on a dépassé 100px : on cache
+                setIsVisible(false);
+            } else {
+                // On remonte : on montre
+                setIsVisible(true);
+            }
+            setLastScrollY(window.scrollY);
+        };
+
+        window.addEventListener('scroll', controlNavbar);
+        return () => window.removeEventListener('scroll', controlNavbar);
+    }, [lastScrollY]);
+    // ----------------------------
+
+    const navigate = useNavigate()
     const ToggleMenu = () => setMenuModal((prev) => !prev)
 
     const handleNavigate = (path: string) => {
@@ -26,7 +46,6 @@ function Header() {
         navigate("/")
     }
 
-
     const navLinks = [
         { name: "Accueil", path: "/" },
         { name: "À propos", path: "about" },
@@ -38,7 +57,9 @@ function Header() {
 
     return (
         <>
-            <header className="w-full h-20 md:h-24 px-6 md:px-15 relative z-50">
+            {/* On ajoute fixed, top-0, left-0 et la transition de transformation */}
+            <header className={`fixed top-0 left-0 w-full h-20 md:h-24 px-6 md:px-15 z-50 transition-transform duration-300 bg-white/80 backdrop-blur-md ${isVisible ? "translate-y-0" : "-translate-y-full"
+                }`}>
                 <div className="w-full h-full flex items-center justify-between">
 
                     {/* LOGO */}
@@ -82,17 +103,17 @@ function Header() {
                     </div>
 
                     {/* BURGER ICON (MOBILE) */}
-                    <button
+                    <Button
                         onClick={ToggleMenu}
                         className="lg:hidden p-2 text-black transition-transform active:scale-90"
                     >
                         {menuModal ? <FiX size={28} /> : <FiMenu size={28} />}
-                    </button>
+                    </Button>
                 </div>
 
                 {/* MOBILE MENU (SIDEBAR) */}
                 <div
-                    className={`fixed top-0 left-0 w-full h-full bg-black/20 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${menuModal ? "opacity-100 visible" : "opacity-0 invisible"
+                    className={`fixed top-0 left-0 w-full h-screen bg-black/20 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${menuModal ? "opacity-100 visible" : "opacity-0 invisible"
                         }`}
                     onClick={ToggleMenu}
                 />
@@ -133,8 +154,11 @@ function Header() {
                 </div>
             </header>
 
-            <ChatWidget />
+            {/* Pour éviter que le contenu ne passe sous le header fixe au début, 
+            on peut soit ajouter un paddingTop au layout, soit un spacer vide */}
+            <div className="h-20 md:h-24"></div>
 
+            <ChatWidget />
             {authForm && (<AuthModal onClose={() => setAuthForm(false)} />)}
         </>
     )

@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
+import Img from "../../../ui/Img"
 
 const SkillsPose = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769281555/Rectangle_69_bt49yd.png"
 
@@ -108,9 +109,9 @@ function Content() {
                     <div className="relative group">
                         <div className="absolute -inset-4 border border-dashed border-gray-200 rounded-[40px] group-hover:rotate-3 transition-transform duration-700" />
                         <div className="rounded-[35px] overflow-hidden shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] border-10 border-white">
-                            <img 
-                                src={SkillsPose} 
-                                alt="Skills & Experience" 
+                            <Img 
+                                src={SkillsPose}
+                                alt="Mon image illustration"
                                 className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" 
                             />
                         </div>

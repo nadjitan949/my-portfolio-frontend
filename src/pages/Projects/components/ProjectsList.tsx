@@ -3,6 +3,7 @@ import { FiExternalLink, FiUser, FiCheckCircle } from "react-icons/fi"
 import { FaGithub, FaBriefcase } from "react-icons/fa"
 import { useEffect, useState } from "react"
 import api from "../../../api/axios"
+import Img from "../../../ui/Img"
 
 
 interface Image {
@@ -142,16 +143,22 @@ function ProjectsList() {
 
           {/* -------- RIGHT MOCKUPS -------- */}
           <div className="flex justify-conter w-full lg:w-[40%] lg:h-full">
-            <div className="mt-20 w-[25%] rounded-xl border-[6px] border-white bg-white relative">
-              <img src={project.mobileView?.url} alt="Mobile" />
-            </div>
-            <div className="left-10 top-0 w-[85%] -ml-10 rounded-xl border-[6px] border-white bg-white overflow-hidden">
-              <img src={project.computerView?.url} alt="Desktop" />
-            </div>
+            {project.mobileView && (
+              <div className="mt-20 w-[25%] rounded-xl border-[6px] border-white bg-white relative">
+                <Img src={project.mobileView?.url} alt="Interface mobile" />
+              </div>
+            )}
+            {project.computerView && (
+              <div className="left-10 top-0 w-[85%] -ml-10 rounded-xl border-[6px] border-white bg-white overflow-hidden">
+                <Img src={project.computerView?.url} alt="Interface ordinateur" />
+              </div>
+            )}
             {/* Tablet */}
-            <div className="mt-20 w-[30%] rounded-xl border-[6px] -ml-10 border-white bg-white">
-              <img src={project.tabletteView?.url} alt="Tablet" />
-            </div>
+            {project.tabletteView && (
+              <div className="mt-20 w-[30%] rounded-xl border-[6px] -ml-10 border-white bg-white">
+                <Img src={project.tabletteView?.url} alt="Interface tablette" />
+              </div>
+            )}
           </div>
         </motion.div>
       ))}

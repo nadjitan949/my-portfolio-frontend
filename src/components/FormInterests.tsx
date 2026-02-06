@@ -99,7 +99,8 @@ function FormInterests({ serviceId, onClose }: FormInterestsProps) {
                             <motion.img 
                                 key={selectedService?.id || 'default'}
                                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                                src={selectedService?.image.url || "https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"} 
+                                src={selectedService?.image.url || "https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"}
+                                alt={`${selectedService?.title} image`}
                                 className="absolute inset-0 w-full h-full object-cover"
                             />
                         </AnimatePresence>

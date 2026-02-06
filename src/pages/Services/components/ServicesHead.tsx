@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef, useState } from "react"
 import Button from "../../../ui/Button"
 import FormInterests from "../../../components/FormInterests"
+import Img from "../../../ui/Img"
 
 const Image1 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284715/Rectangle_113_1_ydr5wk.png"
 const Image2 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284696/Rectangle_113_tbew7v.png"
@@ -42,7 +43,7 @@ function ServicesHead() {
             style={{ y: yImage1 }}
             className="absolute top-0 left-10 lg:left-15 lg:right-10 lg:w-[70%] h-[75%] rounded-[60px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)]"
           >
-            <img src={Image1} alt="" className="w-full h-full object-cover scale-110" />
+            <Img src={Image1} className="w-full h-full object-cover scale-110" />
             <div className="absolute inset-0 bg-blue-900/10 mix-blend-overlay" />
           </motion.div>
 
@@ -51,7 +52,7 @@ function ServicesHead() {
             style={{ y: yImage2 }}
             className="absolute bottom-10 -left-5 lg:left-0 w-[75%] lg:w-[60%] h-[55%] z-20 rounded-[50px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25)] border-8 lg:border-15 border-white"
           >
-            <img src={Image2} alt="" className="w-full h-full object-cover grayscale brightness-110" />
+            <Img src={Image2} className="w-full h-full object-cover grayscale brightness-110" />
           </motion.div>
 
           {/* Élément Abstrait (Le cercle de focus) */}

@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion"
 import { useRef, useEffect, useState } from "react"
 import api from "../../../api/axios"
+import Img from "../../../ui/Img"
 // ✅ Interfaces ajustées au Payload
 interface Icone {
     url: string
@@ -37,7 +38,7 @@ function SkillBox({ skill }: { skill: Skill }) {
             <div className="flex flex-col gap-5">
                 <div className="flex items-center justify-between">
                     <div className="w-14 h-14 rounded-2xl overflow-hidden bg-gray-50 flex items-center justify-center">
-                        <img
+                        <Img
                             src={skill.image.url}
                             alt={skill.name}
                             className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"

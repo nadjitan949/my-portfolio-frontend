@@ -5,6 +5,7 @@ import { useRef, useState } from "react"
 import { BsGoogle } from "react-icons/bs"
 import FormInterests from "../../../components/FormInterests"
 import { useNavigate } from "react-router-dom"
+import Img from "../../../ui/Img"
 
 const AboutPose = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769281577/Rectangle_68_vsf3uk.png"
 
@@ -54,9 +55,9 @@ function Content() {
                         <div className="relative group">
                             <div className="absolute inset-0 border-2 border-gray-100 rounded-[60px] translate-x-4 translate-y-4 -z-10 transition-transform group-hover:translate-x-6 group-hover:translate-y-6" />
                             <div className="rounded-[50px] overflow-hidden shadow-2xl border-8 border-white bg-gray-50">
-                                <img
+                                <Img
                                     src={AboutPose}
-                                    alt="Nadjitan Betan"
+                                    alt="Pose profil"
                                     className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700"
                                 />
                             </div>

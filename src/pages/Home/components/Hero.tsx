@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import MyCV from "../../../cv/Nadjitan_betan.pdf"
 import { GrGoogle } from "react-icons/gr"
 import { BsWhatsapp } from "react-icons/bs"
+import Img from "../../../ui/Img"
 
 const PoseOne = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769281530/upscalemedia-transformed_1_y1amsj.png"
 const PoseTwo = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769281502/upscalemedia-transformed_bzklw2.png"
@@ -66,7 +67,7 @@ function Hero() {
 
                         {/* Image de fond */}
                         <div className="absolute w-full h-full flex items-center justify-center">
-                            <img src={BlueHero} alt="" className="" />
+                            <Img src={BlueHero} alt="Illustration hero" className="" />
                         </div>
 
 
@@ -110,7 +111,7 @@ function Hero() {
                                     className="absolute w-full h-full"
                                 >
                                     <div className="absolute w-70 xl:w-100 bottom-0 right-0 ">
-                                        <img src={PoseOne} alt="" />
+                                        <Img src={PoseOne} alt="Mon profile slide 1" />
                                     </div>
 
                                     <div className="w-[60%] h-full p-15 absolute flex flex-col justify-between">
@@ -174,7 +175,7 @@ function Hero() {
                     >
 
                         <div className="absolute w-full h-full flex items-center justify-center">
-                            <img src={VioletHero} alt="" className="" />
+                            <Img src={VioletHero} alt="Illustration hero" className="" />
                         </div>
 
 
@@ -251,7 +252,7 @@ function Hero() {
                                     </div>
 
                                     <div className="absolute w-70 xl:w-100 bottom-0 right-0 ">
-                                        <img src={PoseTwo} alt="" />
+                                        <Img src={PoseTwo} alt="Mon profil slide 2" />
                                     </div>
 
                                     <div className="absolute -bottom-2 -right-2 flex flex-col items-end">
@@ -284,7 +285,7 @@ function Hero() {
                     >
 
                         <div className="absolute w-full h-full flex items-center justify-center rounded-[70px] overflow-hidden">
-                            <img src={YellowHero} alt="" className="" />
+                            <Img src={YellowHero} alt="Illustration hero" className="" />
                         </div>
 
 
@@ -327,9 +328,9 @@ function Hero() {
                                 >
                                     {/* IMAGE - Fluide : plus petite sur laptop (lg), taille d'origine sur xl */}
                                     <div className="absolute bottom-0 right-0 w-[50%] md:w-[40%] xl:w-96 pointer-events-none opacity-40 lg:opacity-90 z-0">
-                                        <img
+                                        <Img
                                             src={PoseThree}
-                                            alt=""
+                                            alt="Mon profile slide 3"
                                             className="max-h-[60%] lg:max-h-[85%] w-full object-contain object-bottom-right"
                                         />
                                     </div>
@@ -402,7 +403,7 @@ function Hero() {
                     >
                         {/* Image de fond */}
                         <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                            <img src={BlueHero} alt="" className="object-cover w-full h-full" />
+                            <Img src={BlueHero} alt="Illustration sile 1 mobile" className="object-cover w-full h-full" />
                         </div>
 
                         {/* Overlay sombre si inactif */}
@@ -441,7 +442,7 @@ function Hero() {
                                     </div>
 
                                     <div className="absolute bottom-0 right-0 w-40 md:w-65 pointer-events-none">
-                                        <img src={PoseOne} alt="" className="w-full object-contain" />
+                                        <Img src={PoseOne} alt="Mon profil slide 1 mobile" className="w-full object-contain" />
                                     </div>
 
                                     <div className="absolute bottom-4 right-4">
@@ -461,7 +462,7 @@ function Hero() {
                         onClick={() => activeIndex !== 1 && setActiveIndex(1)}
                     >
                         <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                            <img src={VioletHero} alt="" className="object-cover w-full h-full" />
+                            <Img src={VioletHero} alt="Illustratio slide 2 mobile" className="object-cover w-full h-full" />
                         </div>
                         {activeIndex !== 1 && <div className="absolute inset-0 bg-black/40 z-10" />}
 
@@ -480,7 +481,7 @@ function Hero() {
                                 </div>
 
                                 <div className="absolute bottom-0 right-0 w-40 md:w-65 pointer-events-none">
-                                    <img src={PoseTwo} alt="" className="w-full object-contain" />
+                                    <Img src={PoseTwo} alt="Mon profil slide 2 mobile" className="w-full object-contain" />
                                 </div>
                                 <div className="absolute bottom-4 right-4">
                                     <Button onClick={() => { nextIndex() }} className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center border-4 border-white">
@@ -498,7 +499,7 @@ function Hero() {
                         onClick={() => activeIndex !== 2 && setActiveIndex(2)}
                     >
                         <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                            <img src={YellowHero} alt="" className="object-cover w-full h-full" />
+                            <Img src={YellowHero} alt="illustration slide 3 mobile" className="object-cover w-full h-full" />
                         </div>
                         {activeIndex !== 2 && <div className="absolute inset-0 bg-black/40 z-10" />}
 
@@ -517,7 +518,7 @@ function Hero() {
                                     <div className="border-t border-black/20 pt-2"><span className="text-[10px] block">04</span><h4 className="font-bold text-xs">Delivery</h4></div>
                                 </div>
                                 <div className="absolute bottom-0 right-0 w-40 md:w-65 pointer-events-none">
-                                    <img src={PoseThree} alt="" className="w-full object-contain" />
+                                    <Img src={PoseThree} alt="Mon profil slide 3 mobile" className="w-full object-contain" />
                                 </div>
                                 <div className="absolute bottom-4 right-4">
                                     <Button

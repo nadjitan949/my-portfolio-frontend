@@ -5,6 +5,7 @@ import { FiArrowLeft, FiArrowRight } from "react-icons/fi"
 import api from "../../../api/axios"
 import { BiUser } from "react-icons/bi"
 import ReviewForm from "./ReviewForm"
+import Img from "../../../ui/Img"
 
 const RevewBackground = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284976/Rectangle_60_1_ckeayo.png"
 
@@ -68,9 +69,9 @@ function Review() {
 
   return (
     <section className="w-full h-250 relative flex flex-col gap-5 items-center justify-center">
-      <img
+      <Img
         src={RevewBackground}
-        alt=""
+        alt="Arrière plan illustration"
         className="w-full absolute -z-1 h-full object-cover"
       />
 
@@ -99,9 +100,9 @@ function Review() {
           {/* Personne */}
           <div className="flex items-center gap-3">
             {currentReview.avatar ? (
-              <img
+              <Img
                 src={currentReview.avatar}
-                alt="Avatar"
+                alt="Avatar profil"
                 className="w-12 h-12 rounded-full border-2 border-blue-400 object-cover"
               />
             ) : (

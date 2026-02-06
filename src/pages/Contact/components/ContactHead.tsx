@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { FiArrowDownRight, FiSend } from 'react-icons/fi';
 import { FaLinkedinIn, FaGithub, FaWhatsapp } from 'react-icons/fa6';
 import { GrGoogle } from 'react-icons/gr';
+import Img from '../../../ui/Img';
 
 function ContactHead() {
   return (
@@ -71,10 +72,10 @@ function ContactHead() {
             transition={{ duration: 1, delay: 0.2 }}
             className="absolute right-0 top-0 w-[80%] h-[90%] rounded-2xl overflow-hidden border border-white/10 shadow-2xl"
           >
-            <img 
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000" 
+            <Img 
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000"
+              alt="Image d'illustration" 
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              alt="Workspace"
             />
           </motion.div>
 
@@ -85,10 +86,10 @@ function ContactHead() {
             transition={{ duration: 1, delay: 0.5 }}
             className="absolute left-0 bottom-10 w-[60%] h-[50%] rounded-2xl overflow-hidden border-4 border-white shadow-2xl z-20"
           >
-            <img 
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800" 
+            <Img 
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800"
+              alt="Image d'illustration"
               className="w-full h-full object-cover"
-              alt="Teamwork"
             />
           </motion.div>
 
