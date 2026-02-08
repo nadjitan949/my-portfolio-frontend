@@ -1,13 +1,14 @@
 import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { FiMessageCircle, FiX, FiArrowUp, FiUser } from "react-icons/fi"
-import BotProfil from "../assets/Rectangle 62 - Copie.png"
 import api from "../api/axios"
 
 const initialMessage = {
     text: "Bonjour ! Ravi de vous voir ici. Comment puis-je vous aider ?",
     isBot: true
 }
+
+const BotProfil = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769083513/feedbacks/hjebozhnwchanvjx3qkn"
 
 function ChatWidget() {
     const [isOpen, setIsOpen] = useState(false);

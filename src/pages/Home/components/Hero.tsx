@@ -1,7 +1,4 @@
 import { FiArrowRight, FiDownload } from "react-icons/fi"
-import BlueHero from "../../../assets/pngwing.com (2) 1.png"
-import VioletHero from "../../../assets/Rectangle 59 (1).png"
-import YellowHero from "../../../assets/Rectangle 59.png"
 import Button from "../../../ui/Button"
 import { FaGithub, FaLinkedin } from "react-icons/fa6"
 import { useEffect, useState } from "react"
@@ -10,6 +7,10 @@ import MyCV from "../../../cv/Nadjitan_betan.pdf"
 import { GrGoogle } from "react-icons/gr"
 import { BsWhatsapp } from "react-icons/bs"
 import Img from "../../../ui/Img"
+
+const BlueHero = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1770454962/pngwing.com_2_1_eg8xfq.png"
+const VioletHero = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1770454967/Rectangle_59_1_orkhwj.png"
+const YellowHero = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1770454965/Rectangle_59_mceywt.png"
 
 const PoseOne = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769281530/upscalemedia-transformed_1_y1amsj.png"
 const PoseTwo = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769281502/upscalemedia-transformed_bzklw2.png"
@@ -175,7 +176,7 @@ function Hero() {
                     >
 
                         <div className="absolute w-full h-full flex items-center justify-center">
-                            <Img src={VioletHero} alt="Illustration hero" className="" />
+                            <Img src={VioletHero} alt="Illustration hero" className="w-full h-full object-cover" />
                         </div>
 
 
@@ -327,7 +328,7 @@ function Hero() {
                                     className="w-full h-full p-6 md:p-10 xl:p-15 flex flex-col lg:flex-row gap-6 xl:gap-16 relative overflow-hidden"
                                 >
                                     {/* IMAGE - Fluide : plus petite sur laptop (lg), taille d'origine sur xl */}
-                                    <div className="absolute bottom-0 right-0 w-[50%] md:w-[40%] xl:w-96 pointer-events-none opacity-40 lg:opacity-90 z-0">
+                                    <div className="absolute bottom-0 right-0 w-[50%] md:w-[40%] xl:w-96 pointer-events-none opacity-40 lg:opacity-90">
                                         <Img
                                             src={PoseThree}
                                             alt="Mon profile slide 3"

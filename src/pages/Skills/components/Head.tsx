@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import Img from "../../../ui/Img"
 
-const SkillsPose = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769281555/Rectangle_69_bt49yd.png"
+const SkillsPose = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769281555/Rectangle_69_bt49yd"
 
 function Content() {
     const sectionRef = useRef(null)
@@ -22,7 +22,7 @@ function Content() {
         visible: { 
             x: 0, 
             opacity: 1, 
-            transition: { duration: 0.8 } 
+            transition: { duration: 0.8 }
         }
     };
 
