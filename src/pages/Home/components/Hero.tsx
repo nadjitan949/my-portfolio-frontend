@@ -289,11 +289,10 @@ function Hero() {
                             <Img src={YellowHero} alt="Illustration hero" className="" />
                         </div>
 
-
                         <AnimatePresence>
                             {activeIndex !== 2 && (
                                 <motion.div
-                                    key="overlay" // important pour que Framer Motion gère correctement l'animation exit
+                                    key="overlay" // important pour que Framer Motion gère correctement l'animation exit s
                                     initial={{ opacity: 0 }}      // état au montage
                                     animate={{ opacity: 0.4 }}    // état quand actif
                                     exit={{ opacity: 0 }}         // état au démontage
