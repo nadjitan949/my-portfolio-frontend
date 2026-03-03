@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://portfolio.nadjitan.com/sitemap.xml
+Sitemap: https://api.nadjitanbetan.dayal-enterprises.com/sitemap.xml
