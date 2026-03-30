@@ -6,7 +6,7 @@ import Tools from "./components/Tools"
 function Skills() {
     return (
         <>
-            <main className="flex flex-col gap-15">
+            <main className="flex flex-col gap-10">
                 <Head />
                 <SectionTitle text="Languanges"/>
                 <Languages/>

@@ -113,11 +113,15 @@ function Header() {
 
                 {/* MOBILE MENU (SIDEBAR) */}
                 <div
-                    className={`fixed top-0 left-0 w-full h-screen bg-black/20 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${menuModal ? "opacity-100 visible" : "opacity-0 invisible"
+                    className={`fixed top-0 left-0 w-full bg-black/20 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${menuModal ? "opacity-100 visible" : "opacity-0 invisible"
                         }`}
                     onClick={ToggleMenu}
                 />
 
+                
+            </header>
+
+            <div className={`inset-0 w-full bg-black/40 z-30 ${menuModal ? "fixed" : "hidden"} `}>
                 <div className={`fixed top-0 right-0 w-[75%] max-w-xs h-screen bg-white shadow-2xl z-50 transition-transform duration-500 ease-in-out lg:hidden p-8 ${menuModal ? "translate-x-0" : "translate-x-full"
                     }`}>
                     <div className="flex justify-between items-center mb-10">
@@ -152,7 +156,7 @@ function Header() {
                         )}
                     </div>
                 </div>
-            </header>
+            </div>
 
             {/* Pour éviter que le contenu ne passe sous le header fixe au début, 
             on peut soit ajouter un paddingTop au layout, soit un spacer vide */}

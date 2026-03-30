@@ -58,7 +58,7 @@ function Footer() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.5, ease: "easeOut" }}
-                    className="relative w-full lg:w-[70%] xl:w-[60%] min-h-75 lg:h-75 bg-white rounded-[30px] shadow-2xl flex flex-col lg:flex-row"
+                    className="relative w-full lg:w-225 xl:w-250 min-h-75 lg:h-75 bg-white rounded-[30px] shadow-2xl flex flex-col lg:flex-row"
                 >
                     {/* Images de fond décoratives (masquées sur petit mobile pour clarté) */}
                     <div className="absolute inset-0 flex justify-between pointer-events-none opacity-50 lg:opacity-100">
@@ -67,20 +67,20 @@ function Footer() {
                     </div>
 
                     {/* Contenu de la Box */}
-                    <div className="relative z-10 w-full h-full flex flex-col lg:flex-row items-center lg:items-end px-6 lg:px-12 py-8 lg:py-0">
+                    <div className="relative z-10 w-full h-full flex flex-col md:flex-row items-center lg:items-end px-6 lg:px-12 py-8 md:py-0">
 
                         {/* Image Pose 3D - Ajustée pour mobile */}
                         <motion.div
                             initial={{ x: 50, opacity: 0 }}
                             animate={isInView ? { x: 0, opacity: 1 } : {}}
                             transition={{ duration: 0.2, delay: 0.2 }}
-                            className="w-40 lg:w-80 xl:w-100 mb-6 lg:mb-0"
+                            className="w-40 md:w-90 lg:w-100 mb-6 md:mb-0"
                         >
                             <Img src={Pose3d} className="w-full h-auto object-contain" />
                         </motion.div>
 
                         {/* Texte & Bouton */}
-                        <div className="flex-1 flex flex-col gap-4 lg:gap-5 pb-8 lg:py-10 text-center lg:text-left">
+                        <div className="flex-1 flex flex-col gap-4 md:gap-5 pb-8 md:py-10 text-center md:text-left">
                             <h2 className="text-xl lg:text-2xl font-black leading-tight text-black">
                                 Parlez-moi de votre projet et je vous proposerai la meilleure solution
                             </h2>
@@ -102,7 +102,7 @@ function Footer() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="w-full max-w-5xl flex flex-col items-center gap-8 pt-60 lg:pt-20 pb-10"
+                className="w-full max-w-5xl flex flex-col items-center gap-8 pt-70 lg:pt-20 pb-10"
             >
                 {/* Avatar & Nom */}
                 <div className="flex flex-col items-center gap-4">
@@ -151,7 +151,7 @@ function Footer() {
                 {/* Copyright */}
                 <div className="mt-10 pt-8 border-t border-white/5 w-full text-center">
                     <p className="text-gray-600 text-xs font-medium tracking-widest uppercase">
-                        © 2026 Benjamin Nadjitan. Design & Code avec passion.
+                        © 2026 Nadjitan Betan. Design & Code avec passion.
                     </p>
                 </div>
             </motion.div>

@@ -111,7 +111,7 @@ function Hero() {
                                     transition={{ duration: 1 }}
                                     className="absolute w-full h-full"
                                 >
-                                    <div className="absolute w-70 xl:w-100 bottom-0 right-0 ">
+                                    <div className="absolute w-70 xl:w-[38%] bottom-0 right-0 ">
                                         <Img src={PoseOne} alt="Mon profile slide 1" />
                                     </div>
 
@@ -252,7 +252,7 @@ function Hero() {
                                         </div>
                                     </div>
 
-                                    <div className="absolute w-70 xl:w-100 bottom-0 right-0 ">
+                                    <div className="absolute w-70 xl:w-[38%] bottom-0 right-0 ">
                                         <Img src={PoseTwo} alt="Mon profil slide 2" />
                                     </div>
 
@@ -339,8 +339,8 @@ function Hero() {
                                     <div className="w-full lg:w-[85%] xl:w-[70%] flex flex-col justify-between mt-10 md:mt-14 xl:mt-18 z-10">
 
                                         {/* HEADER */}
-                                        <div className="space-y-2 xl:space-y-4 pt-10">
-                                            <h2 className="text-2xl md:text-3xl xl:text-[42px] font-semibold leading-tight text-black">
+                                        <div className="space-y-2 xl:space-y-4">
+                                            <h2 className="text-2xl md:text-3xl xl:text-[40px] font-semibold leading-tight text-black">
                                                 De l’idée au produit final
                                             </h2>
                                             <p className="max-w-full lg:max-w-100 xl:max-w-130 text-black/65 text-xs md:text-sm leading-relaxed">
@@ -349,7 +349,7 @@ function Hero() {
                                         </div>
 
                                         {/* WORKFLOW STEPS - Grille adaptative */}
-                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 xl:gap-10 mt-8 xl:mt-16">
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 xl:gap-10 mt-8 xl:mt-10">
                                             {[
                                                 { id: "01", title: "Discovery", desc: "Compréhension du besoin et objectifs business." },
                                                 { id: "02", title: "Design", desc: "UX flows et interfaces orientées utilisateur." },
@@ -360,7 +360,7 @@ function Hero() {
                                                     <span className="text-[10px] xl:text-xs text-black/40 tracking-widest">{step.id}</span>
                                                     <h3 className="text-sm xl:text-lg font-semibold text-black">{step.title}</h3>
                                                     {/* Description masquée sur mobile pour garder de l'air, visible dès md */}
-                                                    <p className="hidden md:block text-[11px] xl:text-sm text-black/60 leading-relaxed">
+                                                    <p className="hidden md:block text-[11px] xl:text-sm text-black leading-relaxed">
                                                         {step.desc}
                                                     </p>
                                                 </div>
@@ -423,9 +423,9 @@ function Hero() {
                             {showContent && activeIndex === 0 && (
                                 <motion.div
                                     initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                                    className="absolute inset-0 p-6 flex flex-col justify-end"
+                                    className="absolute inset-0 p-6 flex flex-col justify-end gap-5"
                                 >
-                                    <div className="mb-20 w-[90%] md:w-[50%]">
+                                    <div className=" w-[90%] md:w-[50%]">
                                         <p className="text-sm font-medium leading-relaxed text-black/80 max-w-[80%]">
                                             Je suis développeur web et mobile, spécialisé dans la création d’applications modernes et performantes.
                                         </p>
@@ -436,9 +436,19 @@ function Hero() {
                                             <FiDownload /> <span>Telecharger mon cv</span>
                                         </Button>
                                         <div className="flex gap-2">
-                                            <div className="w-9 h-9 rounded-full flex items-center justify-center bg-white shadow-sm"><FaGithub size={18} /></div>
-                                            <div className="w-9 h-9 rounded-full flex items-center justify-center bg-white shadow-sm"><FaLinkedin size={18} className="text-[#2375C2]" /></div>
-                                        </div>
+                                                <a href="https://github.com/nadjitan949" className="w-9 h-9 rounded-full flex items-center justify-center bg-white">
+                                                    <FaGithub size={15} />
+                                                </a>
+                                                <a href="https://www.linkedin.com/in/nadjitan-betan-2a52b83a4/" className="w-9 h-9 rounded-full flex items-center justify-center bg-white">
+                                                    <FaLinkedin size={15} className="text-[#2375C2]" />
+                                                </a>
+                                                <a href="https://wa.me/22896717742" className="w-9 h-9 rounded-full flex items-center justify-center bg-white">
+                                                    <BsWhatsapp size={15} className="text-green-500" />
+                                                </a>
+                                                <a href="mailto:nadjitanb@gmail.com.com" className="w-9 h-9 rounded-full flex items-center justify-center bg-white">
+                                                    <GrGoogle size={15} className="text-red-500" />
+                                                </a>
+                                            </div>
                                     </div>
 
                                     <div className="absolute bottom-0 right-0 w-40 md:w-65 pointer-events-none">

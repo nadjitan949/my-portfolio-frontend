@@ -70,7 +70,7 @@ function FormInterests({ serviceId, onClose }: FormInterestsProps) {
     }
 
     return (
-        <section className="fixed inset-0 z-100 flex items-center justify-center p-6">
+        <section className="fixed inset-0 z-100 flex items-center justify-center p-2 md:p-6">
             {/* Overlay - Flou léger et élégant */}
             <motion.div 
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
@@ -80,7 +80,7 @@ function FormInterests({ serviceId, onClose }: FormInterestsProps) {
             <motion.div 
                 initial={{ opacity: 0, scale: 0.98, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                className="relative w-full max-w-4xl bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row min-h-137.5"
+                className="relative w-full max-w-4xl bg-white rounded-2xl md:overflow-hidden overflow-auto shadow-2xl flex flex-col md:flex-row h-full md:min-h-137.5"
             >
                 {/* --- PANNEAU VISUEL (GAUCHE) - Plus sobre --- */}
                 <div className="md:w-5/12 bg-slate-50 relative p-10 flex flex-col border-r border-slate-100">

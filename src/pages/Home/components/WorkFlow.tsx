@@ -1,4 +1,4 @@
-import { FiCalendar, FiCheckCircle, FiPenTool, FiSearch, FiUploadCloud } from "react-icons/fi"
+import { FiCalendar, FiCheckCircle, FiPenTool, FiSearch, FiUploadCloud, FiArrowRight } from "react-icons/fi"
 import Button from "../../../ui/Button"
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
@@ -9,135 +9,118 @@ const DeskImage = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284860
 const Background = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284843/Rectangle_60_mv4b1f.png"
 
 function WorkFlow() {
-
     const navigate = useNavigate()
     const gotoServices = () => navigate("/services")
 
-    const leftRef = useRef<HTMLDivElement | null>(null)
-    const rightRef = useRef<HTMLDivElement | null>(null)
-    const gridRef = useRef<HTMLDivElement | null>(null);
-    const isGridInView = useInView(gridRef, { once: true, margin: "-50px" })
-
-    const isLeftInView = useInView(leftRef, { once: true, margin: "-100px" })
-    const isRightInView = useInView(rightRef, { once: true, margin: "-100px" })
+    const containerRef = useRef(null)
+    const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
     const workflowSteps = [
-        { icon: <FiSearch size={28} />, label: "Analyse" },
-        { icon: <FiCalendar size={28} className="text-yellow-500" />, label: "Planification" },
-        { icon: <FiPenTool size={28} className="text-pink-500" />, label: "Conception" },
-        { icon: <FiUploadCloud size={28} className="text-blue-500" />, label: "Déploiement" },
-        { icon: <FiCheckCircle size={28} className="text-green-500" />, label: "Livraison" },
+        { icon: <FiSearch />, label: "Analyse", color: "text-blue-500" },
+        { icon: <FiCalendar />, label: "Planification", color: "text-amber-500" },
+        { icon: <FiPenTool />, label: "Conception", color: "text-rose-500" },
+        { icon: <FiUploadCloud />, label: "Déploiement", color: "text-indigo-500" },
+        { icon: <FiCheckCircle />, label: "Livraison", color: "text-emerald-500" },
     ]
 
-    // Variantes pour le conteneur des étapes (gère le décalage entre les enfants)
-    const containerVariants = {
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    }
+
+    const staggerContainer = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: {
-                staggerChildren: 0.1, // Délai entre chaque icône
-            }
+            transition: { staggerChildren: 0.12 }
         }
     }
 
-    const itemGrow = {
-        hidden: { opacity: 0, scale: 0.5 },
-        visible: { opacity: 1, scale: 1 }
-    }
-
-    const itemFromLeft = {
-        hidden: { opacity: 0, x: -100 },
-        visible: { opacity: 1, x: 0 }
-    }
-
-    const itemFromRight = {
-        hidden: { opacity: 0, x: 100 },
-        visible: { opacity: 1, x: 0 }
-    }
-
     return (
-        <section className="w-full p-5 lg:px-15">
-            <div className=" flex flex-col lg:flex-row items-center justify-center gap-5">
-                <motion.div
-                    ref={leftRef}
-                    variants={itemFromLeft}
+        <section ref={containerRef} className="w-full py-12 px-6 lg:px-20 bg-gray-50/50">
+            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 items-stretch">
+                
+                {/* --- CARTE GAUCHE : PHILOSOPHIE --- */}
+                <motion.div 
+                    variants={fadeInUp}
                     initial="hidden"
-                    animate={isLeftInView ? "visible" : "hidden"}
-                    transition={{ duration: 0.1 }}
-                    className="h-150 lg:w-[45%] rounded-[40px] relative overflow-hidden flex items-center justify-center"
+                    animate={isInView ? "visible" : "hidden"}
+                    className="relative group overflow-hidden rounded-[2.5rem] lg:w-1/2 min-h-150 flex flex-col"
                 >
-                    <Img src={DeskImage} alt="Arrière paln illustration" className="object-cover w-full h-full" />
-                    <div className="absolute w-full h-full bg-black/50 p-10 md:p-15 flex flex-col gap-10">
-                        <motion.div variants={itemFromLeft} initial="hidden" animate={isLeftInView ? "visible" : "hidden"}>
-                            <span className="text-white text-4xl font-medium">Organisation</span>
-                        </motion.div>
-
-                        <motion.div variants={itemFromLeft} initial="hidden" animate={isLeftInView ? "visible" : "hidden"}>
-                            <p className="text-white">
-                                Un cadre sain est essentiel pour des projets solides et durables. Je privilégie transparence, respect et communication claire, en collaborant étroitement avec mes partenaires, afin de favoriser confiance et efficacité, garantissant des résultats de qualité à chaque étape.
-                            </p>
-                        </motion.div>
-
-                        <motion.div variants={itemFromLeft} initial="hidden" animate={isLeftInView ? "visible" : "hidden"} className="flex items-center gap-4">
-                            <div className="flex -space-x-5">
-                                <Img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" alt="Avatar collaborateurs" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
-                                <Img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" alt="Avatar collaborateurs" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
-                                <Img src="https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg" alt="Avatar collaborateurs" className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-white object-cover" />
-                                <div className="w-8 h-8 md:w-12 md:h-12 rounded-full backdrop-blur-md border-2 border-white flex items-center justify-center text-sm font-semibold text-white">
+                    <Img src={DeskImage} alt="Workspace" className="absolute inset-0 object-cover w-full h-full transition-transform duration-700 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
+                    
+                    <div className="relative mt-auto p-8 md:p-12 flex flex-col gap-6">
+                        <span className="inline-block px-4 py-1 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-medium tracking-widest uppercase w-fit">
+                            Valeurs
+                        </span>
+                        <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">Organisation</h2>
+                        <p className="text-gray-200 leading-relaxed max-w-md">
+                            Un cadre sain est essentiel pour des projets solides. Je privilégie la transparence et la communication claire pour garantir des résultats de haute précision.
+                        </p>
+                        
+                        <div className="flex items-center gap-6 py-4">
+                            <div className="flex -space-x-3">
+                                {[1, 2, 3].map((i) => (
+                                    <Img key={i} src={`https://i.pravatar.cc/150?u=${i}`} className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white object-cover shadow-lg" />
+                                ))}
+                                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-orange-500 border-2 border-white flex items-center justify-center text-xs font-bold text-white shadow-lg">
                                     +30
                                 </div>
                             </div>
-                            <div className="flex flex-col text-white">
-                                <span className="text-md md:text-lg font-semibold">Collaborations</span>
-                                <span className="text-[10px] md:text-sm text-white/70">projets menés avec succès</span>
+                            <div className="text-white">
+                                <p className="text-lg font-bold leading-none">Collaborations</p>
+                                <p className="text-sm text-gray-300">Projets menés avec succès</p>
                             </div>
-                        </motion.div>
+                        </div>
 
-                        <motion.div variants={itemFromLeft} initial="hidden" animate={isLeftInView ? "visible" : "hidden"} className="mt-auto">
-                            <Button onClick={gotoServices} className="font-semibold bg-white px-5 py-3 rounded-[5px] hover:bg-transparent hover:text-white">Mes services</Button>
-                        </motion.div>
+                        <Button onClick={gotoServices} className="group mt-4 flex items-center gap-2 w-fit bg-white text-black font-bold py-4 px-8 rounded-xl transition-all hover:bg-orange-500 hover:text-white">
+                            Mes services <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+                        </Button>
                     </div>
                 </motion.div>
 
-                {/* Bloc Workflow */}
-                <motion.div
-                    ref={rightRef}
-                    variants={itemFromRight}
+                {/* --- CARTE DROITE : METHODOLOGIE --- */}
+                <motion.div 
+                    variants={fadeInUp}
                     initial="hidden"
-                    animate={isRightInView ? "visible" : "hidden"}
-                    transition={{ duration: 0.8 }}
-                    className="h-190 lg:h-150 lg:w-[40%] rounded-[40px] relative overflow-hidden flex items-center justify-center"
+                    animate={isInView ? "visible" : "hidden"}
+                    transition={{ delay: 0.2 }}
+                    className="relative overflow-hidden rounded-[2.5rem] lg:w-1/2 min-h-125 bg-white border border-gray-100 shadow-2xl shadow-gray-200/50 flex flex-col"
                 >
-                    <Img src={Background} alt="Arrière plan illustration" className="object-cover w-full h-full" />
-                    <div className="absolute w-full h-full p-8 md:p-15 flex flex-col gap-12">
-                        {/* Titre + texte */}
-                        <motion.div variants={itemFromRight} initial="hidden" animate={isRightInView ? "visible" : "hidden"} className="flex flex-col gap-10 max-w-120">
-                            <span className="text-4xl font-medium">Comment je travaille</span>
-                            <p className="text-gray-500 font-semibold">
-                                Chaque projet suit un processus structuré, pensé pour garantir qualité,
-                                efficacité et résultats durables, de l’analyse des besoins jusqu’à la livraison finale,
-                                avec une attention particulière portée à la clarté, à l’anticipation des risques et à l’optimisation
-                                des délais, afin de concevoir des solutions fiables, évolutives et parfaitement alignées avec les objectifs fixés.
+                    <Img src={Background} alt="Pattern" className="absolute top-0 right-0 w-full h-full object-cover opacity-10 pointer-events-none" />
+                    
+                    <div className="relative p-8 md:p-12 flex flex-col h-full">
+                        <div className="mb-10">
+                            <h2 className="text-4xl font-bold text-gray-900 mb-6">Comment je travaille</h2>
+                            <p className="text-gray-500 text-lg leading-relaxed font-medium italic">
+                                "La structure est la clé de la créativité."
                             </p>
-                        </motion.div>
+                            <p className="mt-4 text-gray-600 leading-relaxed">
+                                Chaque projet suit un processus rigoureux, de l’analyse des besoins jusqu’à la livraison finale, pour des solutions fiables et évolutives.
+                            </p>
+                        </div>
 
-                        {/* Grid Workflow */}
-                        <motion.div
-                            ref={gridRef} // On surveille l'arrivée de la grille entière
-                            variants={containerVariants}
-                            initial="hidden"
-                            // L'animation se déclenche uniquement quand la grille arrive à l'écran
-                            animate={isGridInView ? "visible" : "hidden"}
-                            className="grid grid-cols-3 gap-6 w-full md:max-w-90 mt-auto"
+                        <motion.div 
+                            variants={staggerContainer}
+                            className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-auto"
                         >
                             {workflowSteps.map((step, i) => (
                                 <motion.div
                                     key={i}
-                                    variants={itemGrow} // Chaque item utilise la variante itemGrow
-                                    className="flex flex-col items-center justify-center bg-white rounded-2xl h-23"
+                                    whileHover={{ y: -5, backgroundColor: "#fff" }}
+                                    variants={{
+                                        hidden: { opacity: 0, scale: 0.9 },
+                                        visible: { opacity: 1, scale: 1 }
+                                    }}
+                                    className="flex flex-col items-center justify-center p-4 rounded-2xl bg-gray-50 border border-gray-100 transition-shadow hover:shadow-xl hover:shadow-gray-200/40"
                                 >
-                                    {step.icon}
-                                    <span className="font-medium text-gray-500 text-[10px] md:text-sm">{step.label}</span>
+                                    <div className={`text-2xl mb-2 ${step.color}`}>
+                                        {step.icon}
+                                    </div>
+                                    <span className="font-bold text-gray-700 text-xs md:text-sm tracking-wide">
+                                        {step.label}
+                                    </span>
                                 </motion.div>
                             ))}
                         </motion.div>

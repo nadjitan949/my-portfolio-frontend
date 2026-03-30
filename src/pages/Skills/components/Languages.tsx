@@ -74,7 +74,7 @@ function Languages() {
     }, [])
 
     return (
-        <section className="w-full py-24 bg-white overflow-hidden">
+        <section className="w-full bg-white overflow-hidden">
             
             {/* --- TOP : GRILLE FIXE DES LANGAGES (Badge Style) --- */}
             <div className="max-w-7xl mx-auto px-6 mb-24">
