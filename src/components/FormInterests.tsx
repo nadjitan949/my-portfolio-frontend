@@ -3,12 +3,15 @@ import { FiX, FiSend, FiMessageSquare, FiHash, FiShare2, FiLayers } from 'react-
 import { useEffect, useState } from 'react'
 import api from '../api/axios'
 import Button from '../ui/Button'
+import Img from '../ui/Img'
 
 interface Service {
     id: number
     title: string
-    image: { url: string }
+    image: string
 }
+
+const MotionImg = motion(Img)
 
 interface FormInterestsProps {
     serviceId?: number | null
@@ -96,10 +99,10 @@ function FormInterests({ serviceId, onClose }: FormInterestsProps) {
 
                     <div className="mt-auto relative h-40 w-full rounded-xl overflow-hidden shadow-inner">
                         <AnimatePresence mode="wait">
-                            <motion.img 
+                            <MotionImg
                                 key={selectedService?.id || 'default'}
                                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                                src={selectedService?.image.url || "https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"}
+                                src={selectedService?.image || "https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"}
                                 alt={`${selectedService?.title} image`}
                                 className="absolute inset-0 w-full h-full object-cover"
                             />

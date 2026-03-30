@@ -102,7 +102,7 @@ function ChatWidget() {
     }
 
     return (
-        <div className="fixed bottom-10 right-10 z-50 flex flex-col items-end font-sans">
+        <div className="fixed mx-5 bottom-10 md:right-10 z-50 flex flex-col items-end font-sans">
 
             <AnimatePresence>
                 {isOpen && (
@@ -110,7 +110,7 @@ function ChatWidget() {
                         initial={{ opacity: 0, scale: 0.95, y: 30 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 30 }}
-                        className="w-105 h-162.5 bg-white rounded-[40px] shadow-[0_40px_100px_rgba(0,0,0,0.25)] overflow-hidden flex flex-col mb-6"
+                        className=" md:w-105 md:h-162.5 bg-white rounded-[40px] shadow-[0_40px_100px_rgba(0,0,0,0.25)] overflow-hidden flex flex-col mb-6"
                     >
                         {/* Header Premium Noir */}
                         <div className="bg-black px-10 py-5 text-white relative">
@@ -203,7 +203,7 @@ function ChatWidget() {
                         setIsOpen(true)
                     }
                 }}
-                className="w-15 h-15 bg-black rounded-full flex items-center justify-center shadow-[0_20px_50px_rgba(0,0,0,0.35)] z-50"
+                className="w-15 h-15 bg-black rounded-full flex items-center justify-center shadow-[0_20px_50px_rgba(0,0,0,0.35)] z-50 border-5"
             >
                 <AnimatePresence mode="wait">
                     {isOpen ? (

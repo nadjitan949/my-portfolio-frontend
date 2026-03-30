@@ -5,12 +5,6 @@ import { useEffect, useState } from "react"
 import api from "../../../api/axios"
 import Img from "../../../ui/Img"
 
-
-interface Image {
-  url: string
-  public_id: string
-}
-
 type Project = {
   id: number
   title: string
@@ -21,15 +15,41 @@ type Project = {
   tools: string[]
   live: string | ""
   github: string | ""
-  computerView: Image | null
-  tabletteView: Image | null
-  mobileView: Image | null
+  computerView: string
+  tabletteView: string
+  mobileView: string
 }
 
 const cardVariants = {
   hidden: { opacity: 0, scale: 0.9, y: 80 },
   visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.1 } },
 }
+
+const PlaceholderMockup = ({ title, type }: { title: string, type: 'pc' | 'mobile' | 'tablet' }) => (
+  <div className="w-full h-full bg-linear-to-br from-gray-800 to-gray-900 flex flex-col p-4 relative overflow-hidden group">
+    {/* Barre de navigation style navigateur */}
+    <div className="flex gap-1.5 mb-4 opacity-50">
+      <div className="w-2 h-2 rounded-full bg-red-500" />
+      <div className="w-2 h-2 rounded-full bg-yellow-500" />
+      <div className="w-2 h-2 rounded-full bg-green-500" />
+    </div>
+
+    <div className="flex-1 flex flex-col items-center justify-center text-center space-y-3">
+      <div className="p-4 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10 group-hover:scale-110 transition-transform duration-500">
+        <FaBriefcase className="text-white/20 text-3xl" />
+      </div>
+      <div>
+        <p className="text-white/40 text-[10px] uppercase tracking-widest font-bold">{type}</p>
+        <h4 className="text-white/20 text-sm font-medium line-clamp-1 px-4 italic">
+          {title}
+        </h4>
+      </div>
+    </div>
+
+    {/* Effet de brillance */}
+    <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+  </div>
+);
 
 function ProjectsList() {
 
@@ -38,20 +58,29 @@ function ProjectsList() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
+        const res = await api.get("/projects/all");
+        if (!res.data.success) return alert(res.data.message);
 
-        const res = await api.get("/projects/all")
-        if (!res.data.success) return alert(res.data.message)
+        // On map sur les projets pour parser les strings JSON en tableaux
+        const parsedData = res.data.projects.map((project: Project) => ({
+          ...project,
+          collabTags: typeof project.collabTags === 'string'
+            ? JSON.parse(project.collabTags)
+            : (project.collabTags || []),
+          tools: typeof project.tools === 'string'
+            ? JSON.parse(project.tools)
+            : (project.tools || [])
+        }));
 
-        const data: Project[] = res.data.projects
-        setProject(data)
+        setProject(parsedData);
 
       } catch (error) {
-        console.log("Erreur: ", error)
+        console.log("Erreur: ", error);
       }
-    }
+    };
 
-    fetchProjects()
-  }, [])
+    fetchProjects();
+  }, []);
 
   return (
     <section className="w-full py-16 px-6 md:px-12 lg:px-24 flex flex-col items-center gap-10 font-sans bg-gray-200 pb-70">
@@ -123,7 +152,7 @@ function ProjectsList() {
                 onClick={(e) => {
                   if (!project.github) {
                     e.preventDefault()
-                    alert("Projet en cours 🚧")
+                    alert("Projet privé 🔒")
                   }
                 }}
                 className="flex items-center gap-2 bg-black text-white px-7 py-3 rounded-full hover:opacity-80 transition font-bold text-[10px] md:text-sm">
@@ -142,23 +171,35 @@ function ProjectsList() {
           </div>
 
           {/* -------- RIGHT MOCKUPS -------- */}
-          <div className="flex justify-conter w-full lg:w-[40%] lg:h-full">
-            {project.mobileView && (
-              <div className="mt-20 w-[25%] rounded-xl border-[6px] border-white bg-white relative">
-                <Img src={project.mobileView?.url} alt="Interface mobile" />
-              </div>
-            )}
-            {project.computerView && (
-              <div className="left-10 top-0 w-[85%] -ml-10 rounded-xl border-[6px] border-white bg-white overflow-hidden">
-                <Img src={project.computerView?.url} alt="Interface ordinateur" />
-              </div>
-            )}
-            {/* Tablet */}
-            {project.tabletteView && (
-              <div className="mt-20 w-[30%] rounded-xl border-[6px] -ml-10 border-white bg-white">
-                <Img src={project.tabletteView?.url} alt="Interface tablette" />
-              </div>
-            )}
+          <div className="flex justify-center w-full lg:w-[45%] lg:h-full relative mt-10 lg:mt-0">
+
+            {/* COMPUTER VIEW (On le met en premier ou en fond) */}
+            <div className="relative w-[85%] aspect-video rounded-xl border-[6px] border-white bg-white shadow-2xl overflow-hidden z-10">
+              {project.computerView ? (
+                <Img src={project.computerView} alt="Interface ordinateur" className="w-full h-full object-cover" />
+              ) : (
+                <PlaceholderMockup title={project.title} type="pc" />
+              )}
+            </div>
+
+            {/* MOBILE VIEW (Superposé devant à gauche) */}
+            <div className="absolute -left-4 -bottom-6 w-[25%] aspect-9/19 rounded-2xl border-[6px] border-white bg-white shadow-2xl overflow-hidden z-30 hidden md:block">
+              {project.mobileView ? (
+                <Img src={project.mobileView} alt="Interface mobile" className="w-full h-full object-cover" />
+              ) : (
+                <PlaceholderMockup title={project.title} type="mobile" />
+              )}
+            </div>
+
+            {/* TABLET VIEW (Superposé derrière à droite) */}
+            <div className="absolute -right-4 -bottom-2 w-[35%] aspect-4/3 rounded-xl border-[6px] border-white bg-white shadow-xl overflow-hidden z-20 hidden md:block">
+              {project.tabletteView ? (
+                <Img src={project.tabletteView} alt="Interface tablette" className="w-full h-full object-cover" />
+              ) : (
+                <PlaceholderMockup title={project.title} type="tablet" />
+              )}
+            </div>
+
           </div>
         </motion.div>
       ))}

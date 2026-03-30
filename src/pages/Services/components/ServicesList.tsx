@@ -7,11 +7,6 @@ import { useNavigate } from 'react-router-dom'
 import FormInterests from '../../../components/FormInterests'
 import Img from '../../../ui/Img'
 
-interface Image {
-  url: string
-  public_id: string
-}
-
 interface Interests {
   id: number,
   media: string
@@ -22,7 +17,7 @@ interface Interests {
 interface Service {
   id: number
   title: string
-  image: Image
+  image: string
   description: string
   Interests: Interests[] | null
 }
@@ -50,6 +45,8 @@ function ServicesList() {
 
         const data: Service[] = res.data.services
         setServices(data)
+
+        console.log("Données: ", res.data.services)
         
       } catch (error) {
         console.log("Erreur: ", error)
@@ -79,7 +76,7 @@ function ServicesList() {
               className="relative z-20 w-full lg:rounded-t-none rounded-t-[15px] lg:w-[45%] h-64 md:h-80 overflow-hidden lg:shadow-xl"
             >
               <Img
-                src={service.image.url}
+                src={service.image}
                 alt={service.title}
                 className="w-full h-full object-cover"
               />

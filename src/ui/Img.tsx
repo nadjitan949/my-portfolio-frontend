@@ -4,20 +4,32 @@ interface ImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 
 const Img = ({ src, alt, ...props }: ImgProps) => {
   
-  // Fonction pour ajouter les paramètres d'optimisation Cloudinary
   const optimizeCloudinaryUrl = (url: string) => {
-    if (!url.includes("res.cloudinary.com")) return url;
+    if (!url) return ""; 
 
-    // On cherche "/upload/" dans l'URL pour insérer nos paramètres juste après
-    const optimizationParams = "f_auto,q_auto,w_800"; // format auto, qualité auto, largeur max 800px
-    return url.replace("/upload/", `/upload/${optimizationParams}/`);
+    let finalUrl = url;
+
+    // Si l'URL commence par '{', c'est du JSON, on l'extrait
+    if (url.startsWith('{')) {
+      try {
+        finalUrl = JSON.parse(url).url;
+      } catch (error) {
+        console.log("Erreur: ", error)
+        finalUrl = url; // En cas d'erreur, on garde la string d'origine
+      }
+    }
+
+    if (!finalUrl || !finalUrl.includes("res.cloudinary.com")) return finalUrl;
+
+    const optimizationParams = "f_auto,q_auto,w_800";
+    return finalUrl.replace("/upload/", `/upload/${optimizationParams}/`);
   };
 
   return (
     <img 
       src={optimizeCloudinaryUrl(src)} 
       alt={alt || "Nadjitan Portfolio"} 
-      loading="lazy" // Aide encore plus la performance
+      loading="lazy"
       {...props} 
     />
   );

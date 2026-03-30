@@ -8,15 +8,10 @@ const illustration1 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v176928
 const illustration2 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284141/Rectangle_81_ezmjwq.png"
 const illustration3 = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769284151/Rectangle_83_zgkill.png"
 
-interface Icone {
-    url: string
-    public_id: string
-}
-
 interface Skills {
     id: number
     name: string
-    image: Icone
+    image: string
     level: string
     description: string
 }
@@ -24,7 +19,7 @@ interface Skills {
 interface Languages {
     id: number,
     name: string,
-    icone: Icone
+    icone: string
 }
 
 interface Category {
@@ -94,7 +89,7 @@ function Languages() {
                             className={`flex items-center gap-3 px-6 py-3 bg-white rounded-2xl border border-gray-100 shadow-sm text-gray-400 transition-all duration-300 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/5 cursor-default`}
                         >
                             <motion.div className=" w-6 h-6">
-                                <Img src={lang.icone.url} alt={lang.name} />
+                                <Img src={lang.icone} alt={lang.name} />
                             </motion.div>
                             <span className="font-black text-[10px] uppercase tracking-[0.2em] text-gray-900">
                                 {lang.name}

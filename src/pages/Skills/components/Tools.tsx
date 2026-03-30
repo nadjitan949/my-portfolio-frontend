@@ -3,15 +3,11 @@ import { useRef, useEffect, useState } from "react"
 import api from "../../../api/axios"
 import Img from "../../../ui/Img"
 // ✅ Interfaces ajustées au Payload
-interface Icone {
-    url: string
-    public_id: string
-}
 
 interface Skill {
     id: number
     name: string
-    image: Icone
+    image: string
     level: string
     description: string
 }
@@ -39,7 +35,7 @@ function SkillBox({ skill }: { skill: Skill }) {
                 <div className="flex items-center justify-between">
                     <div className="w-14 h-14 rounded-2xl overflow-hidden bg-gray-50 flex items-center justify-center">
                         <Img
-                            src={skill.image.url}
+                            src={skill.image}
                             alt={skill.name}
                             className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
                         />
