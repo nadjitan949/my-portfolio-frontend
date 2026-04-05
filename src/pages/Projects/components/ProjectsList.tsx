@@ -4,6 +4,7 @@ import { FaGithub, FaBriefcase } from "react-icons/fa"
 import { useEffect, useState } from "react"
 import api from "../../../api/axios"
 import Img from "../../../ui/Img"
+import { Clock1 } from "lucide-react"
 
 type Project = {
   id: number
@@ -112,10 +113,17 @@ function ProjectsList() {
                 <FaBriefcase />
                 <span>{project.type}</span>
               </div>
-              <div className="flex items-center gap-2 text-green-500">
-                <FiCheckCircle className="stroke-[3px]" />
-                <span className="font-bold">{project.status}</span>
-              </div>
+              {project.status === "En cours" ? (
+                <div className="flex items-center gap-2 text-yellow-500">
+                  <Clock1 size={15} className="stroke-[3px]" />
+                  <span className="font-bold">{project.status}</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 text-green-500">
+                  <FiCheckCircle className="stroke-[3px]" />
+                  <span className="font-bold">{project.status}</span>
+                </div>
+              )}
             </div>
 
             {/* Collaborators */}
