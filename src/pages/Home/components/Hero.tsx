@@ -3,10 +3,10 @@ import Button from "../../../ui/Button"
 import { FaGithub, FaLinkedin } from "react-icons/fa6"
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import MyCV from "../../../cv/Nadjitan_betan.pdf"
 import { GrGoogle } from "react-icons/gr"
 import { BsWhatsapp } from "react-icons/bs"
 import Img from "../../../ui/Img"
+import api from "../../../api/axios"
 
 const BlueHero = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1770454962/pngwing.com_2_1_eg8xfq.png"
 const VioletHero = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1770454967/Rectangle_59_1_orkhwj.png"
@@ -24,13 +24,34 @@ function Hero() {
 
     const nextIndex = () => setActiveIndex(prev => (prev + 1) % 3)
 
-    const handleDownloadCV = () => {
-        const link = document.createElement("a")
-        link.href = MyCV
-        link.download = "CV_Nadjitan_Betan.pdf"
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
+    const handleDownloadCV = async () => {
+        try {
+            const res = await api.get("/cv/download", {
+                responseType: 'blob' // Important : on récupère des données binaires
+            })
+
+            // 1. Créer une URL locale pointant vers le Blob reçu
+            const url = window.URL.createObjectURL(new Blob([res.data]))
+
+            // 2. Créer un élément <a> invisible
+            const link = document.createElement('a')
+            link.href = url
+
+            // 3. Définir le nom du fichier (optionnel si géré par le back via Content-Disposition)
+            link.setAttribute('download', 'CV_NADJITAN_BETAN.pdf')
+
+            // 4. Ajouter au document, cliquer, puis supprimer
+            document.body.appendChild(link)
+            link.click()
+
+            // Nettoyage
+            if (link.parentNode) link.parentNode.removeChild(link)
+            window.URL.revokeObjectURL(url)
+
+        } catch (error) {
+            console.error("Erreur serveur", error)
+            alert("Une erreur s'est produite pendant le téléchargement, veuillez réessayer")
+        }
     }
 
     // Carousel principal
@@ -184,7 +205,7 @@ function Hero() {
                             {activeIndex !== 1 && (
                                 <motion.div
                                     key="overlay"
-                                    initial={{ opacity: 0 }}      
+                                    initial={{ opacity: 0 }}
                                     animate={{ opacity: 0.4 }}    // état quand actif
                                     exit={{ opacity: 0 }}         // état au démontage
                                     transition={{ duration: 0.9 }} // durée de la transition
@@ -436,19 +457,19 @@ function Hero() {
                                             <FiDownload /> <span>Telecharger mon cv</span>
                                         </Button>
                                         <div className="flex gap-2">
-                                                <a href="https://github.com/nadjitan949" className="w-9 h-9 rounded-full flex items-center justify-center bg-white">
-                                                    <FaGithub size={15} />
-                                                </a>
-                                                <a href="https://www.linkedin.com/in/nadjitan-betan-2a52b83a4/" className="w-9 h-9 rounded-full flex items-center justify-center bg-white">
-                                                    <FaLinkedin size={15} className="text-[#2375C2]" />
-                                                </a>
-                                                <a href="https://wa.me/22896717742" className="w-9 h-9 rounded-full flex items-center justify-center bg-white">
-                                                    <BsWhatsapp size={15} className="text-green-500" />
-                                                </a>
-                                                <a href="mailto:nadjitanb@gmail.com.com" className="w-9 h-9 rounded-full flex items-center justify-center bg-white">
-                                                    <GrGoogle size={15} className="text-red-500" />
-                                                </a>
-                                            </div>
+                                            <a href="https://github.com/nadjitan949" className="w-9 h-9 rounded-full flex items-center justify-center bg-white">
+                                                <FaGithub size={15} />
+                                            </a>
+                                            <a href="https://www.linkedin.com/in/nadjitan-betan-2a52b83a4/" className="w-9 h-9 rounded-full flex items-center justify-center bg-white">
+                                                <FaLinkedin size={15} className="text-[#2375C2]" />
+                                            </a>
+                                            <a href="https://wa.me/22896717742" className="w-9 h-9 rounded-full flex items-center justify-center bg-white">
+                                                <BsWhatsapp size={15} className="text-green-500" />
+                                            </a>
+                                            <a href="mailto:nadjitanb@gmail.com.com" className="w-9 h-9 rounded-full flex items-center justify-center bg-white">
+                                                <GrGoogle size={15} className="text-red-500" />
+                                            </a>
+                                        </div>
                                     </div>
 
                                     <div className="absolute bottom-0 right-0 w-40 md:w-65 pointer-events-none">
