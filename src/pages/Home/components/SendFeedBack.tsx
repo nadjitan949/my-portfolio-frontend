@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FiX, FiUser, FiBriefcase, FiMessageCircle, FiSend, FiPlus, FiCamera } from 'react-icons/fi';
-import { useState, useRef } from 'react';
+import { useState, useRef, type FormEvent } from 'react';
 import api from '../../../api/axios';
 import Button from '../../../ui/Button';
 import Img from '../../../ui/Img';
@@ -11,49 +11,42 @@ interface SendFeedBackProps {
 
 function SendFeedBack({ onClose }: SendFeedBackProps) {
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const [preview, setPreview] = useState<string | null>(null);
+    const [author, setAuthor] = useState('')
+    const [jobTitle, setJobTitle] = useState('')
+    const [content, setContent] = useState('')
+    const [imageFile, setImageFile] = useState<File | null>(null)
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null)
     const [loading, setLoading] = useState(false);
-
-    const [formData, setFormData] = useState({
-        author: '',
-        jobTitle: '',
-        content: '',
-        image: null as File | null
-    });
 
     const defaultAvatar = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg"
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (file) {
-            setFormData({ ...formData, image: file })
-            setPreview(URL.createObjectURL(file))
+            setImageFile(file)
+            setPreviewUrl(URL.createObjectURL(file))
         }
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         setLoading(true)
 
-        const data = new FormData()
-        data.append('author', formData.author)
-        data.append('jobTitle', formData.jobTitle)
-        data.append('content', formData.content)
-        if (formData.image) {
-            data.append('image', formData.image)
-        } else {
-            data.append('image.url', defaultAvatar)
-        }
-
         try {
-            const res = await api.post("/feedbacks/add", data)
-            if (res.data.success) {
-                onClose()
-                alert(res.data.message)
-            }
+            const formData = new FormData()
+            formData.append('author', author)
+            formData.append('jobTitle', jobTitle)
+            formData.append('content', content)
+            if (imageFile) formData.append('image', imageFile)
+
+            const res =  await api.post('/feedbacks/add', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            })
+
+            if (!res.data.success) return alert(res.data.message)
+            alert(res.data.message)
         } catch (error) {
-            console.error(error)
-            alert("Oups! Une erreur est survenue lors de l'envoi.")
+            console.error("Erreur:", error)
         } finally {
             setLoading(false)
         }
@@ -84,7 +77,7 @@ function SendFeedBack({ onClose }: SendFeedBackProps) {
                     <div className="flex justify-center">
                         <div className="relative group cursor-pointer" onClick={() => fileInputRef.current?.click()}>
                             <div className="w-28 h-28 rounded-4xl overflow-hidden shadow-2xl shadow-blue-500/10 ring-4 ring-slate-50 transition-transform group-hover:scale-105 active:scale-95">
-                                <Img src={preview || defaultAvatar} className="w-full h-full object-cover" />
+                                <Img src={previewUrl || defaultAvatar} className="w-full h-full object-cover" />
                                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                                     <FiCamera className="text-white" size={24} />
                                 </div>
@@ -105,7 +98,8 @@ function SendFeedBack({ onClose }: SendFeedBackProps) {
                                 <input
                                     required type="text" placeholder="Ex: Salim"
                                     className="w-full bg-transparent outline-none text-sm font-medium text-slate-700 placeholder:text-slate-200"
-                                    onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                                    value={author}
+                                    onChange={(e) => setAuthor(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -118,7 +112,8 @@ function SendFeedBack({ onClose }: SendFeedBackProps) {
                                 <input
                                     required type="text" placeholder="Ex: Manager"
                                     className="w-full bg-transparent outline-none text-sm font-medium text-slate-700 placeholder:text-slate-200"
-                                    onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
+                                    value={jobTitle}
+                                    onChange={(e) => setJobTitle(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -131,7 +126,8 @@ function SendFeedBack({ onClose }: SendFeedBackProps) {
                                 <textarea
                                     required placeholder="Votre expérience..."
                                     className="w-full bg-transparent outline-none text-sm font-medium text-slate-700 placeholder:text-slate-200 resize-none h-24"
-                                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                                    value={content}
+                                    onChange={(e) => setContent(e.target.value)}
                                 />
                             </div>
                         </div>
