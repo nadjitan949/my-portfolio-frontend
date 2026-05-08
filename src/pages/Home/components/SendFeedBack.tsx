@@ -18,7 +18,7 @@ function SendFeedBack({ onClose }: SendFeedBackProps) {
     const [previewUrl, setPreviewUrl] = useState<string | null>(null)
     const [loading, setLoading] = useState(false);
 
-    const defaultAvatar = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg"
+    const defaultAvatar = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1774832675/feedbacks/dcbamzhhxxuleifpxew1.webp"
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]

@@ -27,8 +27,7 @@ function Collabs() {
     const containerRef = useRef<HTMLDivElement | null>(null)
     const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
-    const DEFAULT_AVATAR = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769275993/8380015_qklxw6.jpg"
-
+    const DEFAULT_AVATAR = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1774832675/feedbacks/dcbamzhhxxuleifpxew1.webp"
 
     const getTestimonial = (offset: number) => {
         if (!testimonials || testimonials.length === 0) return null;
@@ -69,6 +68,22 @@ function Collabs() {
         return image.url
     }
 
+    const closeForm = async () => {
+        try {
+
+            const res = await api.get("/feedbacks/all")
+            if (!res.data.success) return alert(res.data.message)
+
+            const data: Testimonial[] = res.data.feedbacks
+            setTestimonials(data)
+
+            setShowForm(false)
+
+        } catch (error) {
+            console.log("Erreur: ", error)
+        }
+    }
+
     return (
         <section className="text-center overflow-hidden">
             <div ref={containerRef} className="relative max-w-6xl mx-auto flex items-center justify-center">
@@ -101,23 +116,27 @@ function Collabs() {
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={currentIndex}
-                                initial={{ scale: 0.8, opacity: 0 }}
-                                animate={isInView ? { scale: 1, opacity: 1 } : {}}
-                                exit={{ scale: 0.8, opacity: 0 }}
-                                transition={{ duration: 0.3 }}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.4, ease: "easeInOut" }}
                                 className="flex flex-col items-center"
                             >
                                 <div className="w-48 h-48 md:w-60 md:h-60 diamond-shape shadow-2xl rounded-[30px] overflow-hidden border-4 border-white pentagon-shape">
                                     <Img src={getImageUrl(getTestimonial(0)?.image)} alt={`${getTestimonial(0)?.author} avatar`} className="object-cover w-full h-full" />
                                 </div>
 
-                                <div className="mt-10 max-w-md">
+                                <motion.div
+                                    layout
+                                    transition={{ layout: { duration: 0.4, ease: "easeInOut" } }}
+                                    className="mt-10 max-w-md min-h-40 flex flex-col justify-start"
+                                >
                                     <h3 className="text-2xl font-bold text-gray-900">{getTestimonial(0)?.author}</h3>
                                     <p className="text-blue-500 font-medium mb-4">{getTestimonial(0)?.jobTitle}</p>
-                                    <p className="text-gray-500 italic w-50 lg:w-full text-sm md:text-base leading-relaxed line-clamp-3">
+                                    <p className="text-gray-500 italic w-50 lg:w-full text-sm md:text-base leading-relaxed">
                                         "{getTestimonial(0)?.content}"
                                     </p>
-                                </div>
+                                </motion.div>
                             </motion.div>
                         </AnimatePresence>
                     </div>
@@ -149,7 +168,7 @@ function Collabs() {
                 Laissez un témoignage
             </Button>
 
-            {showForm && (<SendFeedBack onClose={() => setShowForm(false)} />)}
+            {showForm && (<SendFeedBack onClose={closeForm} />)}
 
         </section>
     )

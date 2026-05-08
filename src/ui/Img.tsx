@@ -2,10 +2,12 @@ interface ImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
 }
 
+const DEFAULT_FALLBACK = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1774832675/feedbacks/dcbamzhhxxuleifpxew1.webp";
+
 const Img = ({ src, alt, ...props }: ImgProps) => {
-  
+
   const optimizeCloudinaryUrl = (url: string) => {
-    if (!url) return ""; 
+    if (!url) return DEFAULT_FALLBACK;
 
     let finalUrl = url;
 
@@ -26,11 +28,14 @@ const Img = ({ src, alt, ...props }: ImgProps) => {
   };
 
   return (
-    <img 
-      src={optimizeCloudinaryUrl(src)} 
-      alt={alt || "Nadjitan Portfolio"} 
+    <img
+      src={optimizeCloudinaryUrl(src)}
+      alt={alt || "Nadjitan Portfolio"}
       loading="lazy"
-      {...props} 
+      onError={(e) => {
+        (e.currentTarget as HTMLImageElement).src = DEFAULT_FALLBACK;
+      }}
+      {...props}
     />
   );
 };
