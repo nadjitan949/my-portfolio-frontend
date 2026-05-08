@@ -1,11 +1,12 @@
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa6"
 import Button from "../../../ui/Button"
-import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { motion, useInView, useMotionValue, useSpring } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
 import { BsGoogle } from "react-icons/bs"
 import FormInterests from "../../../components/FormInterests"
 import { useNavigate } from "react-router-dom"
 import Img from "../../../ui/Img"
+
 
 const AboutPose = "https://res.cloudinary.com/dndpjhfm1/image/upload/v1769281577/Rectangle_68_vsf3uk.png"
 
@@ -34,6 +35,27 @@ function Content() {
             transition: { duration: 0.8 }
         }
     };
+
+    function Counter({ targetValue }: { targetValue: number }) {
+        const ref = useRef<HTMLSpanElement>(null);
+        const motionValue = useMotionValue(0);
+        const springValue = useSpring(motionValue, { damping: 30, stiffness: 100 });
+        const isInView = useInView(ref, { once: true });
+
+        useEffect(() => {
+            if (isInView) motionValue.set(targetValue);
+        }, [isInView, targetValue, motionValue]);
+
+        useEffect(() => {
+            return springValue.on("change", (latest) => {
+                if (ref.current) {
+                    ref.current.textContent = Math.floor(latest).toString();
+                }
+            });
+        }, [springValue]);
+
+        return <span ref={ref}>0</span>;
+    }
 
     return (
         <section
@@ -90,9 +112,9 @@ function Content() {
                         {/* Social & Contact Buttons */}
                         <div className="flex flex-wrap items-center gap-6 pt-4">
                             <Button
-                            onClick={() => navigate("/contact")}
+                                onClick={() => navigate("/contact")}
                                 children="Me contacter"
-                                className="px-10 py-5 rounded-2xl bg-black text-white font-bold uppercase tracking-widest text-xs hover:bg-blue-500 hover:text-black transition-all duration-300 shadow-lg"
+                                className="px-10 py-5 rounded-2xl bg-blue-500 text-white font-bold uppercase tracking-widest text-xs hover:bg-black transition-all duration-300 shadow-lg"
                             />
                             <div className="flex gap-3">
                                 {[
@@ -116,14 +138,19 @@ function Content() {
                     className="mt-32 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gray-100 pt-20"
                 >
                     {[
-                        { label: "Années d'expérience", value: "03+" },
-                        { label: "Projets Terminés", value: "24+" },
-                        { label: "Clients Heureux", value: "12+" },
-                        { label: "Technologies", value: "15+" },
+                        { label: "Années d'expérience", num: 3, suffix: "+" },
+                        { label: "Projets Terminés", num: 24, suffix: "+" },
+                        { label: "Clients Heureux", num: 12, suffix: "+" },
+                        { label: "Technologies", num: 15, suffix: "+" },
                     ].map((stat, i) => (
                         <div key={i} className="text-center">
-                            <h4 translate="no" className="text-4xl md:text-5xl font-black text-gray-900">{stat.value}</h4>
-                            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mt-2">{stat.label}</p>
+                            <h4 translate="no" className="text-4xl md:text-5xl font-black text-blue-500">
+                                <Counter targetValue={stat.num} />
+                                {stat.suffix}
+                            </h4>
+                            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mt-2">
+                                {stat.label}
+                            </p>
                         </div>
                     ))}
                 </motion.div>
