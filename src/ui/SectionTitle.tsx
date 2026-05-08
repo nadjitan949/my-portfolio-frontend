@@ -16,7 +16,7 @@ function SectionTitle({ text }: { text: string }) {
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : {}}
                 transition={{ duration: 0.1, ease: "easeOut" }}
-                className="h-1 w-40 md:w-45 lg:w-50 bg-black origin-center"
+                className="h-1 w-40 md:w-45 lg:w-50 bg-blue-400 origin-center"
             />
 
             {/* TEXTE */}
