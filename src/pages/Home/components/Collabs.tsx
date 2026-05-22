@@ -23,6 +23,15 @@ function Collabs() {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [testimonials, setTestimonials] = useState<Testimonial[] | null>(null)
     const [showForm, setShowForm] = useState<boolean>(false)
+    const [expanded, setExpanded] = useState(false)
+    const contentRef = useRef<HTMLParagraphElement>(null)
+    const [contentHeight, setContentHeight] = useState(0)
+
+    useEffect(() => {
+        if (contentRef.current) {
+            setContentHeight(contentRef.current.scrollHeight)
+        }
+    }, [currentIndex, testimonials])
 
     const containerRef = useRef<HTMLDivElement | null>(null)
     const isInView = useInView(containerRef, { once: true, margin: "-100px" })
@@ -32,7 +41,7 @@ function Collabs() {
     const getTestimonial = (offset: number) => {
         if (!testimonials || testimonials.length === 0) return null;
         const index = (currentIndex + offset + testimonials.length) % testimonials.length;
-        return testimonials[index]; // <-- ici on retourne bien l'objet à l'index
+        return testimonials[index];
     }
 
 
@@ -55,11 +64,30 @@ function Collabs() {
 
     const nextSlide = () => {
         if (!testimonials || testimonials.length === 0) return
-        setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-    };
+        if (expanded) {
+            setExpanded(false)
+            setContentHeight(72) // <-- reset instantané avant le slide
+            setTimeout(() => {
+                setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+            }, 500)
+        } else {
+            setContentHeight(72) // <-- reset instantané avant le slide
+            setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+        }
+    }
+
     const prevSlide = () => {
         if (!testimonials || testimonials.length === 0) return
-        setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+        if (expanded) {
+            setExpanded(false)
+            setContentHeight(72) // <-- reset instantané
+            setTimeout(() => {
+                setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+            }, 500)
+        } else {
+            setContentHeight(72) // <-- reset instantané
+            setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+        }
     }
 
     const getImageUrl = (image?: Image | string | null) => {
@@ -113,6 +141,7 @@ function Collabs() {
 
                     {/* Témoignage Central */}
                     <div className="flex flex-col items-center z-20 px-4 min-w-[320px]">
+
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={currentIndex}
@@ -120,23 +149,45 @@ function Collabs() {
                                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                                 exit={{ opacity: 0, y: -10 }}
                                 transition={{ duration: 0.4, ease: "easeInOut" }}
-                                className="flex flex-col items-center"
+                                className="flex flex-col items-center w-full"
                             >
                                 <div className="w-48 h-48 md:w-60 md:h-60 diamond-shape shadow-2xl rounded-[30px] overflow-hidden border-4 border-white pentagon-shape">
                                     <Img src={getImageUrl(getTestimonial(0)?.image)} alt={`${getTestimonial(0)?.author} avatar`} className="object-cover w-full h-full" />
                                 </div>
 
-                                <motion.div
-                                    layout
-                                    transition={{ layout: { duration: 0.4, ease: "easeInOut" } }}
-                                    className="mt-10 max-w-md min-h-40 flex flex-col justify-start"
-                                >
+                                <div className="mt-10 max-w-md flex flex-col justify-start w-full">
                                     <h3 className="text-2xl font-bold text-gray-900">{getTestimonial(0)?.author}</h3>
                                     <p className="text-blue-500 font-medium mb-4">{getTestimonial(0)?.jobTitle}</p>
-                                    <p className="text-gray-500 italic w-50 lg:w-full text-sm md:text-base leading-relaxed">
-                                        "{getTestimonial(0)?.content}"
-                                    </p>
-                                </motion.div>
+
+                                    <div className="relative">
+                                        <div className="overflow-hidden" style={{ height: expanded ? contentHeight : 72 }}>
+                                            <p
+                                                ref={contentRef}
+                                                className="text-gray-500 italic w-50 lg:w-full text-sm md:text-base leading-relaxed mx-auto"
+                                            >
+                                                "{getTestimonial(0)?.content}"
+                                            </p>
+                                        </div>
+
+                                        {!expanded && (
+                                            <div className="absolute bottom-0 left-0 right-0 h-6 bg-linear-to-t from-white to-transparent pointer-events-none" />
+                                        )}
+                                    </div>
+
+                                    <button
+                                        onClick={() => setExpanded((prev) => !prev)}
+                                        className="mt-2 text-blue-400 hover:text-blue-600 text-xs font-medium self-end transition-colors duration-200 flex items-center gap-1"
+                                    >
+                                        {expanded ? "Afficher moins" : "Afficher plus"}
+                                        <motion.span
+                                            animate={{ rotate: expanded ? 180 : 0 }}
+                                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                                            className="inline-block"
+                                        >
+                                            ▼
+                                        </motion.span>
+                                    </button>
+                                </div>
                             </motion.div>
                         </AnimatePresence>
                     </div>

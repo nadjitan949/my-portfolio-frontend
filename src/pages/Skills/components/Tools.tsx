@@ -189,7 +189,7 @@ function Tools() {
                             {/* Contenu du Modal */}
                             <div className="flex flex-col gap-6">
                                 <div className="flex items-center gap-4">
-                                    <div className="w-16 h-16 rounded-2xl overflow-hidden bg-gray-50 flex items-center justify-center flex-shrink-0 border border-gray-100">
+                                    <div className="w-16 h-16 rounded-2xl overflow-hidden bg-gray-50 flex items-center justify-center shrink-0 border border-gray-100">
                                         <Img
                                             src={selectedSkill.image}
                                             alt={selectedSkill.name}
