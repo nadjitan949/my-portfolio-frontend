@@ -1,5 +1,7 @@
 import Background from "./components/Background"
 import Content from "./components/Content"
+import Collabs from "./components/Collabs"
+import SectionTitle from "../../ui/SectionTitle"
 import { Helmet } from "react-helmet-async"
 
 function About() {
@@ -16,6 +18,8 @@ function About() {
 
       <main className="mb-60 flex flex-col gap-20">
         <Content />
+        <SectionTitle text="Quelques collaborateurs" />
+        <Collabs />
         <Background />
       </main>
     </>
