@@ -104,7 +104,7 @@ function Collabs() {
                                 <h3 className="text-base md:text-lg font-black text-gray-900 uppercase tracking-tight truncate group-hover:text-blue-600 transition-colors">
                                     {collab.fullname}
                                 </h3>
-                                <p className="text-xs md:text-sm font-medium text-gray-400 line-clamp-2 max-w-[220px] mx-auto leading-relaxed">
+                                <p className="text-xs md:text-sm font-medium text-gray-400 line-clamp-2 max-w-55 mx-auto leading-relaxed">
                                     {collab.jobTitle}
                                 </p>
                             </div>
